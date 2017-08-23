@@ -1,0 +1,22 @@
+{ 
+   "127.0.0.1:4200":{
+        "theme":"nomado",
+        "restaurant_id":64645,
+        "shortKey": "gok"
+    },
+    "ma2-local.com":{
+        "theme":"nomado",
+        "restaurant_id":59292,
+        "shortKey" : "nom"
+    },
+    "ma3-local.com":{
+        "theme":"pastawiz",
+        "restaurant_id":74670,
+        "shortKey": "pas"
+    },
+    "ma4-local.com":{
+        "theme":"spice",
+        "restaurant_id":62793,
+         "shortKey" : "spi"
+    }   
+}

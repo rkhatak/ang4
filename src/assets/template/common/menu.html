@@ -1,0 +1,235 @@
+<div id="{{page.tabslug}}" ng-controller = "MenuController as menu" class="bg_section psection">
+	<div class="_960px">
+                    <p class="sectiontitle">menu</p>            
+                    
+                    <div class="t-menu-render menutab">
+                        <div class="navbarcontainer">
+                            <div>
+                                <ul class="unstyled navbar nav md-hide">
+                                    <li class="tab_{{dis.category_id}} tabs {{isDMDeal(dis.category_name)}}" ng-repeat="dis in dishes"><a ng-click="showTab(dis.category_id,dis.category_name);" id="{{dis.category_id}}" href="javascript:;" class="tablink" ng-bind-html="dis.category_name"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div ng-if="restaurantDeal.length>0" class="y_sticky_deal sticky_deal text-align-center"> 
+                            <div ng-repeat="deal in restaurantDeal">
+                                <p class="title_sticky_deal text-uppercase"><span class="color_red">{{deal.title}}</span></p>
+                                <p class="tnc_sticky_deal">Offer valid through {{startDate(deal.start_on)}}. {{deal.condition}}</p>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="res_menu y-menu-section">
+                                <div ng-repeat="dis in dishes" class="{{isDMDeal(dis.category_name)}}">
+                                    <div class="tabs mobilemenutabs xs-hide tab_{{dis.category_id}}">
+                                        <a href="javascript:;" class="tablink" ng-bind-html="dis.category_name" ng-click="showTab(dis.category_id,dis.category_name);"></a>
+                                    </div>
+                                    <div class="menu_{{dis.category_id}} menu_container">
+                                    <div ng-repeat="di in dis.sub_categories">
+                                        <div class="subcategories_level1 sectiontitle" ng-bind-html="di.category_name"></div>
+                                        <div class="menubox" ng-repeat="di_sub in di.sub_categories">
+                                            <div class="subcategories sectiontitle" ng-bind-html="di_sub.category_name"></div>
+                                            <div class="item_menupanel">
+                                                <div class="item_menu t_order_{{di_sub2.online_order_allowed}}" ng-click="addToOrder(di_sub2)" ng-repeat="di_sub2 in di_sub.sub_categories">
+                                                    <div class="img_menu" ng-show="!isEmpty(di_sub2.item_image_url)" >
+                                                        <div style="background-image:url('{{imagePath}}{{di_sub2.item_image_url}}');"></div>
+                                                    </div>
+                                                    <div class="item_contentpanel">
+                                                        <p class="txt_restitle"><span ng-bind-html="di_sub2.item_name"></span></p>
+                                                        <p class="txt_resdes"><span ng-bind-html="di_sub2.item_desc"></span></p>
+                                                        <p class="txt_price">${{di_sub2.prices[0].value}}</p>
+                                                        <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="item_menu t_order_{{items.online_order_allowed}}" ng-click="addToOrder(items)" ng-repeat="items in di_sub.category_items">
+                                                    <div class="img_menu" ng-show="!isEmpty(items.item_image_url)">
+                                                        <div style="background-image:url('{{imagePath}}{{items.item_image_url}}');"></div>
+                                                    </div>
+                                                    <div class="item_contentpanel">
+                                                        <p class="txt_restitle"><span ng-bind-html="items.item_name"></span></p>
+                                                        <p class="txt_resdes"><span ng-bind-html="items.item_desc"></span></p>
+                                                        <p class="txt_price">${{items.prices[0].value}}</p>
+                                                        <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item_menupanel">
+                                            <div class="item_menu t_order_{{items.online_order_allowed}}" ng-click="addToOrder(items)" ng-repeat="items in di.category_items">
+                                                <div class="img_menu" ng-show="!isEmpty(items.item_image_url)">
+                                                    <div style="background-image:url('{{imagePath}}{{items.item_image_url}}');"></div>
+                                                </div>
+                                                <div class="item_contentpanel">
+                                                    <p class="txt_restitle"><span ng-bind-html="items.item_name"></span></p>
+                                                    <p class="txt_resdes"><span ng-bind-html="items.item_desc"></span></p>
+                                                    <p class="txt_price">${{items.prices[0].value}}</p>
+                                                    <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item_menupanel">
+                                        <div class="item_menu t_order_{{items.online_order_allowed}}" ng-click="addToOrder(items)" ng-repeat="items in dis.category_items">
+                                            <div class="img_menu" ng-show="!isEmpty(items.item_image_url)">
+                                                <div style="background-image:url('{{imagePath}}{{items.item_image_url}}');"></div>
+                                            </div>
+                                            <div class="item_contentpanel">
+                                                <p class="txt_restitle"><span ng-bind-html="items.item_name"></span></p>
+                                                <p class="txt_resdes"><span ng-bind-html="items.item_desc"></span></p>
+                                                <p class="txt_price">${{items.prices[0].value}}</p>
+                                                <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="box_ordersummary ordersummarystep1">
+                                <div class="text-align-right">
+                                  <a href="javascript:void(0)" class="y-backtomenu sm-hide"><i class="i_close">+</i></a>
+                                </div>
+                                <p class="txt_ordersummary">order summary</p>
+                                <div id="menu_ordersection">
+                                    <input type="radio" name="munchservices" ng-model="munchservices" ng-click='getCheckDelivery()' value="delivery" id="t_delivery" hidden>
+                                    <input type="radio" name="munchservices" ng-model="munchservices" ng-click='getCheckTakeout()' value="takeout" id="t_takeout" checked="checked" hidden>
+                                    <label class="ubtn blackbtn btn_service" for="t_delivery">Delivery</label>
+                                    <label class="ubtn btn_service" for="t_takeout">takeout</label>
+                                    <div class="t-orderDateTimePanel">
+                                        <div ng-include="getPartial('common', 'cartTime.html')"></div>                                                
+                                    </div>
+                                    <div class="ordersummary_delivery ordersummary_service">
+                                        <div ng-if="deliveryOrderCart" class="box_expectedtime _fs12 _mt35 ordertype_location">
+                                            <p class="_fontarial txt_minhours t_distance_text"></p>
+                                            <p class="_fs14 txt_upper t_delivery_address">{{setDeliveryAddress}}</p>
+                                            <p><a href="javascript:void(0)" class="txtlink t_change_address" title="Edit Address" ng-click="editAddress()">Change</a></p>
+                                        </div>
+                                        <p ng-if="deliveryOrderCart" class="_mt10 txt_rightalign _fs12 y-deleiver-yes"><i class="i_right i_circle"></i>Good News! This restaurant will deliver to you.</p>
+<!--                                        <p  ng-if="wrongAddress" class="_mt10 txt_rightalign y-deleiver-no"><i class="i_circle i_wrong">+</i>Sorry, you&#180;re outside this restaurant&#180;s delivery zone.</p>-->
+                                    </div>
+                                    <div class="ordersummary_takeout ordersummary_service">
+                                        <!--Takeout-->
+                                    </div>
+                                    <div class="_mt35">
+                                        <p ng-hide="cartLenth" class="txt_bs_noorder t-no-order">There are currently no items in your order. Click on items from the menu to add them to your order.</p>
+                                        <div ng-hide="cartLenthMinOrder" class="txt_bs_noorder _mt10 t-min-order">
+                                            Minimum order must exceed: 
+                                            <strong>$<span class="t_min_order">{{dishes.minDelivery}}</span>*</strong>
+                                            <p class="_fs9">(*excluding tax, tip and delivery charges)</p>
+                                        </div>
+                                    </div>
+                                    <div class="box_orderitem _mt35">
+                                        <p class="title_bs_order">your order</p>
+                                        <div class="container">
+                                            <div ng-if="cartItemDisplay" class="yourorder_box">
+                                                <div ng-repeat="cartitem in cartItems" ng-include="getPartial('common', 'orderItem.html')"></div>                                                
+                                            </div>
+                                            <div class="row txt_bs_item _mt35">
+                                                <div class="col-md-8 col-xs-8 text-uppercase">Subtotal</div>
+                                                <div class="col-md-4 col-xs-4 text-align-right">$<span class="order_subtotal">0.00</span></div>
+                                            </div>
+                                            <div class="row txt_bs_item t-deliverycharge">
+                                                <div class="col-md-8 col-xs-8 text-uppercase">Delivery</div>
+                                                <div class="col-md-4 col-xs-4 text-align-right">$<span class="deliverycharge_amount">0.00</span></div>
+                                            </div>
+                                            <div class="row txt_bs_item y-discount hide">
+                                                <div class="col-md-8 col-xs-8 text-uppercase">Discount</div>
+                                                <div class="col-md-4 col-xs-4 text-align-right">- $<span class="discount_amount">0.00</span></div>
+                                            </div>
+                                            <div class="row txt_bs_item">
+                                                <div class="col-md-8 col-xs-8 text-uppercase">Tax</div>
+                                                <div class="col-md-4 col-xs-4 text-align-right">$<span class="order_tax">0.00</span></div>
+                                            </div>
+                                            <div class="row txt_bs_item y-tip" ng-if="deliveryOrderCart">
+                                                <div class="col-md-8 col-xs-8 text-uppercase _pt3">Tip Amount</div>
+                                                <div class="col-md-4 col-xs-4 text-align-right"><select class="t-tip-percent" ng-change="updateTipOrder(selectedTip)" ng-model="selectedTip"></select></div>
+                                            </div>                              
+                                            <div class="_mt35" ng-if="deliveryOrderCart">
+                                                <p class="txt_bs_noorder txt_bs_item y-tip-desc">You may be asked to sign a receipt at the time of delivery. You do not need to re-enter the tip.</p>
+                                            </div>
+                                            <div class="promo_code _mt35">
+                                              <p class="title_bs_order _pb10">your promo code</p>
+                                              <div class="row y-promocode">
+                                                  <div class="col-md-8 col-xs-8"><input type="text" id="promocode" value=""></div>
+                                                  <div class="col-md-4 col-xs-4"><a href="javascript:void(0)" class="ubtn" ng-click="promocode()">Enter</a></div>
+                                              </div>
+                                              <div class="row y-promocode-apply _fs14 hide">
+                                                <strong class="col-md-8 col-xs-8 y-promocode-coupan text-uppercase"></strong>
+                                                <strong class="col-md-4 col-xs-8 text-align-right">- $<span class="y-promocode-amount"></span></strong>
+                                              </div>
+                                              <p class="error-message hide">Invalid Promo code</p>
+                                            </div>
+                                            <div class="row txt_bs_total totalCls">
+                                                <div class="col-md-8 col-xs-8 text-uppercase">Total</div>
+                                                <div class="col-md-4 col-xs-4 text-align-right">$<span class="order_total">0.00</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-align-center _mt35">
+                                        <a href="javascript:void(0)" class="ubtn blackbtn" ng-click="checkOut(this);
+                                                    $event.preventDefault()">checkout</a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="checkoutDiv" class="checkoutDiv">
+                        <p class="msgreservation">Your  <span class="y-order-type"></span> order comes to <strong class="y-order-total"></strong> and brings you one step (and a short walk) closer to food nirvana. </p>
+                        <p class="txt_givecall">You can always give us a call at <a href="tel:{{formattedPhoneNo(currentRestaurant.phone_no)}}">{{formattedPhoneNo(currentRestaurant.phone_no)}}</a> to make any changes up to an hour before your {{cartOrderType}} time.</p>
+                        <div id="menu_checkout" class="menu_checkout clearfix">
+                            <div class="res_menu">
+                                <div class="text-align-center xs-hide _pb30">
+                                    <a href="javascript:void(0)" class="ubtn blackbtn y-backtomenu" ng-click="cartEditOrder()">Back to menu</a>
+                                </div>
+                                <div ng-if='checkoutDiv' class="checkoutsection">
+                                     <div ng-if="!checkoutPaymentSuccess" ng-include="getPartial('common', 'checkOutUser.html')"></div>
+                                     <div ng-if="checkoutPaymentSuccess" ng-include="getPartial('common', 'checkoutThankyou.html')"></div>
+                                </div>
+                            </div>
+                            <div class="box_ordersummary ordersummarystep2">
+                                <p class="txt_ordersummary">order summary</p>
+                                <p class="text-align-center t-edit_order_link"><a href="javascript:void(0)" class=" ubtn blackbtn" title="Edit Order" ng-click="cartEditOrder()">Edit Order</a></p>
+                                <p class="title_first _mt30">Order Type:</p>
+                                <p class="subtitle_first text-capitalize y-orderType"></p>
+                                <p class="title_first _mt30">Time of Order:</p>
+                                <p class="subtitle_first y-timeOfOrder"></p>
+                                <p class="title_first _mt30">Expected Time of <span class="y-orderType">{{order_type}}</span>:</p>
+                                <p class="subtitle_first y-expectedTime"></p>
+                                <p class="msgreservation y-dealtext hide"></p>
+                                <div class="box_orderitem _mt35">
+                                    <p class="title_bs_order">your order</p>
+                                    <div class="container">
+                                        <div ng-if="cartItemDisplay" class="yourorder_box">
+                                                <div ng-repeat="cartitem in cartItems" ng-include="getPartial('common', 'orderItem.html')"></div>                                                
+                                            </div>
+                                        <div class="row txt_bs_item _mt35">
+                                            <div class="col-md-8 text-uppercase">Subtotal</div>
+                                            <div class="col-md-4 text-align-right">$<span class="order_subtotal">0.00</span></div>
+                                        </div>
+                                        <div class="row txt_bs_item t-deliverycharge">
+                                            <div class="col-md-8 text-uppercase">Delivery</div>
+                                            <div class="col-md-4 text-align-right">$<span class="deliverycharge_amount">0.00</span></div>
+                                        </div>
+                                        <div class="row txt_bs_item y-discount hide">
+                                            <div class="col-md-8 text-uppercase">Discount</div>
+                                            <div class="col-md-4 text-align-right">- $<span class="discount_amount">0.00</span></div>
+                                        </div>
+                                        <div class="row txt_bs_item">
+                                            <div class="col-md-8 text-uppercase">Tax</div>
+                                            <div class="col-md-4 text-align-right">$<span class="order_tax">0.00</span></div>
+                                        </div>
+                                        <div class="row txt_bs_item y-tip hide">
+                                            <div class="col-md-8 text-uppercase">Tip</div>
+                                            <div class="col-md-4 text-align-right default_tip"></div>
+                                        </div>                           
+                                        <div class="_mt35">
+                                            <p class="txt_bs_noorder txt_bs_item y-tip-desc hide">You may be asked to sign a receipt at the time of delivery. You do not need to re-enter the tip.</p>
+                                        </div>
+                                        <div class="row txt_bs_total totalCls">
+                                            <div class="col-md-8 text-uppercase">Total</div>
+                                            <div class="col-md-4 text-align-right">$<span class="order_total">0.00</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>

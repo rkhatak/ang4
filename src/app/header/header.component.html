@@ -1,0 +1,45 @@
+  <div class="pageheader smallheight">
+      <div class="_960px">
+      <a href="javascript:void(0)" class="link_hamburger link_mobilemenu" (click)=goResponsive()><i class="i_hamburger"><span></span></i></a>
+      <a href="javascript:void(0)" class="_brandname pagejump" data-target="home"><img src="{{headerLogo}}brandlogo.png" alt=""><span>brandName</span></a>
+      <div class="headerlink_topright y-resraurant-services">
+          <a href="javascript:void(0)" data-target="menu" class="hl y-go-to-menu pagejump" ng-click="orderOnline()">order online</a>
+          <a href="javascript:void(0)" ng-show="currentRestaurant.has_reservation" data-popup="reserve_a_table" class="hl y-reserveTable _m0" ng-click="reservetable()">reserve a table</a>
+          <a href="javascript:void(0)" data-target="menu" class="i_addtocard pagejump y-go-to-checkout" ng-click="nevigateMenu('menu')">
+                <i class="gi i_cart y-no-item"><span class="cartCount">{{cartCount}}</span></i>
+         </a>
+            <div class="y_tooltip tooltip headertooltip hide">
+              <p class="txt text-align-center">'<strong class="added_item"></strong>'<br>added to your order.</p>
+            </div>
+      </div>
+      <div class="dropdown_mobile">
+         <ul class="unstyled navbar nav">
+            <li *ngFor="let tabs of headermenu.data">
+               <a class="pagejump" routerLink="/{{tabs.tabslug}}">{{tabs.tabname}}</a>
+            </li>
+
+             <li *ngIf="is_login">
+               <a href="javascript:void(0)" class="hl" ng-click="nevigateMySction('myaccount')">My Account</a>
+            </li>
+             <li *ngIf="is_login">
+               <a href="javascript:void(0)" data-popup="logout" class="hl y-logout" ng-click="logout()">logout</a>
+            </li>
+             <li *ngIf="!is_login">
+               <a href="javascript:void(0)" data-popup="register" class="hl y-register" ng-click="userRegister()">Register</a>
+            </li>
+             <li *ngIf="!is_login">
+               <a href="javascript:void(0)" data-popup="login" class="hl y-login" ng-click="userlogin()">login</a>
+            </li>
+            
+            
+            <li class="xs-hide line-orderonline">
+               <a href="javascript:void(0)" data-target="menu" class="hl y-go-to-menu pagejump" ng-click="orderOnline()">order online</a>
+            </li>
+            
+            <li class="xs-hide">
+               <a href="javascript:void(0)" ng-show="currentRestaurant.has_reservation" data-popup="reserve_a_table" class="hl y-reserveTable" ng-click="reservetable()">reserve a table</a>
+            </li>
+         </ul>
+      </div>
+      </div>
+   </div>

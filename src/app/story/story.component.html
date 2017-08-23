@@ -1,0 +1,12 @@
+ <div *ngIf="story" class="storydividedtxt _mt50" [innerHtml]="story.story_title"></div>
+                    <div *ngFor="let s of story.section_list">
+                        <p class="sectiontitle _mt70">{{s.title}}</p>
+                        <div class="row _pt50 _pt15-xs display-flex display-flex-none-xs">
+                            <div class="col-md-6 col-xs-12">
+                                <img  [src]="getImage(story.base_url,s.image)"  alt="{{s.title}}" class="img-responsive-100">
+                            </div>
+                            <div class="col-md-6 col-xs-12 vm">
+                                <p [innerHtml]="s.description" class="_pl10"></p>
+                            </div>
+                        </div>
+                    </div>

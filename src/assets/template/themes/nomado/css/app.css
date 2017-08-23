@@ -1,0 +1,133 @@
+._960px{width:100%!important;max-width:initial!important;}
+.pageheader ._960px{text-align:left;}
+.navbar a{letter-spacing:normal;font-weight:400;font-size:0.75em;}
+.dine-more .txt_becomeamemeber, .navbar li.dmdeal + li a, .navbar li:first-child a, .navbar .active a{color:#fa5d00;}
+.pageheader .headerlink_topright a.hl{font-weight:400;letter-spacing:normal;font-size:11px;}
+.pageheader .headerlink_topright{right:60px;}
+.pageheader .navbar li a{text-align:right;}
+.textareadiv, select, textarea, input[type="text"], input[type="number"], input[type="password"]{border-width:1px;}
+.footer{background:#fa5d00;text-align:right;padding:10px 60px;}
+.footer .brandfooterlogo{display:none;}
+.about .img_about{max-width:100%;}
+[value="takeout"]:checked ~ [for="t_takeout"], .ubtn:hover, .ubtn.active, input.ubtn, .ubtn{border-color:#fa5d00;background:#fa5d00;color:#fff;letter-spacing:normal;font-weight:normal;font-size:0.75em;}
+.res_menu .item_menu:hover .btn_addtocard span, input.ubtn:hover, .ubtn:hover{background:#fa5d00;border-color:#fa5d00;}
+.gi span{background:#fa5d00;}
+.ubtn.blackbtn{background:#000;color:#fff;}
+.ubtn.blackbtn{border-color:#000;}
+.addonpopup_footer .color-red, .box_ordersummary .txt_bs_total, a.txtlink{color:#fa5d00;}
+.title_popupitem, .addonpopup_footer b{font-weight:400;}
+.tooltip .txt{background:#fa5d00;}
+.tooltip .txt:before{border-bottom-color:#fa5d00;}
+.btn_addtocard:after, .btn_addtocard:before{background:#fff;}
+.res_menu .item_contentpanel .txt_restitle{letter-spacing:normal;font-weight:400;}
+.res_menu .item_menu .txt_resdes span{font-family:inherit;}
+.res_menu .btn_addtocard span{font-weight:700;letter-spacing:2px;}
+.home .txt_homepage{max-width:initial;}
+.videotitle_homepage{font-weight:400;font-size: 2.9em;max-width: 869px;width:90%;background: #292929 url(../images/bg_home.jpg) no-repeat bottom right;padding:48px;-webkit-box-shadow: 0px 3px 7px 0px rgba(50, 50, 50, 0.39);-moz-box-shadow:0px 3px 7px 0px rgba(50, 50, 50, 0.39);box-shadow:0px 3px 7px 0px rgba(50, 50, 50, 0.39);margin:0 auto;}
+.videotitle_homepage span{color:#fa5d00;display:block;padding-bottom:20px;font-size:0.4875em;}
+.i_hamburger{width:30px;}
+.link_hamburger{left:initial;right:0;z-index:1;}
+.pageheader:not(.smallheight) .link_hamburger{top:28px;}
+.pageheader .headerlink_topright a.hl:first-child{margin-right:27px}
+.text-align-center.t-edit_order_link{text-align:left;}
+.sectiontitle{font-weight:400;text-align:left;}
+
+/**Reserve a table**/
+.reserveinputstyle input, .reserveinputstyle select{font-weight:400;letter-spacing:normal;}
+.custom_checkbox .control_indicator, .timepicker_custom{border-width:1px;}
+.msgreservation{color:#fff;font-weight:400;letter-spacing:normal;}
+.ubtn.blackbtn.y-editReservation{padding:10px 20px;}
+.txt_checkout_notification{padding-top:2px;}
+.formstep3 .sectiontitle{font-size:1.5em;}
+.thanku .box_typeofplace p{letter-spacing:normal;font-weight:400;}
+.txt_ordersummary{text-align:center!important;color:#fa5d00;}
+.txt_yourinvites_expect, .thanku .txt_receiptid, .checkoutsection_thanku .txt_receiptid{font-weight:400;}
+.timepicker_custom li{background:#000000;color:#ffffff;}
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default, .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div.xdsoft_current, .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_today, .timepicker_custom li.current{background:#fa5d00!important;box-shadow:none!important;}
+
+/**About**/
+.txt_typeplace, .typeofplace{display:none;}
+.about_content .txt_about{font-family:inherit;}
+.t-edit_order_link a.ubtn:hover, .t-edit_order_link a.ubtn, .ubtn.blackbtn.y-editReservation, .ubtn.blackbtn.btn_service[for="t_delivery"]{background:#f1efef;border-color:#f1efef;color:#000;}
+
+/***Menu**/
+._menu  .navbar{text-align:left;}
+.box_ordersummary .title_bs_order{letter-spacing:normal;}
+.box_ordersummary a.txtlink{font-size:11px;}
+.box_ordersummary .txt_bs_total{font-size:0.75em;}
+.t-edit_order_link a.ubtn{min-width:150px;text-align:center;}
+.i_pencil, .i_pencil:after{background:#fff;}
+.i_wrong{color:#fff;}
+.i_pencil:before{border-top-color:#fff;}
+.owl-dots .owl-dot span{width:13px;height:13px;border-radius:100%;border:1px solid #fff;background:transparent;}
+.owl-dots .owl-dot.active span, .owl-dots .owl-dot:hover span{background:#fff;}
+
+/***Contact***/
+.panel_contactsection{margin:0;width:30%;float:left;}
+.contact.psection{background:#f8f8f8;padding:0;overflow:hidden;}
+.callout_contact{background:transparent;margin:0;text-align:left;padding-top:28px;}
+.callout_contact .sectiontitle{padding-bottom:22px;}
+.callout_contact .txt_address strong{letter-spacing:normal;font-weight:400;}
+.callout_contact .txt_contactdetail{font-family:inherit;}
+.callout_contact .txt_contactdetail strong{color:#b1aeae;}
+.callout_contact .btn_contactreserve{margin:60px 0 47px;min-width:180px;text-align:center;}
+.callout_contact .txt_contactdetail .row, .callout_contact .txt_address strong{margin:0;}
+.callout_contact .txt_contactdetail .row{padding-left:0;padding-right:0;}
+.dine-more .panel_dinemore_learn{padding-bottom:97px;}
+#viewmap{background:#e0e0e0;width:60%;min-height:100vh;float:right;}
+.callout_contact .txt_contactdetail strong{letter-spacing:normal;font-weight:400;}
+
+@media (min-width: 992px){
+.psection{padding-left:0;padding-right:0;}
+.pageheader{padding:0 60px}
+.pageheader.smallheight ._960px{padding:0;}
+.pageheader.smallheight ._brandname {position:static;margin-top:5px;}
+.dropdown_mobile.active {max-width: 380px;left: initial;right: 0;top: 0;padding-top: 80px;z-index: 0;}
+.pageheader .headerlink_topright{top:28px;z-index:1}
+.home{position:static;background-size:cover;min-height:100vh;}
+.about.psection{padding:0 0 0 60px;background:#f8f8f8;}
+.about .aboutsection{background:transparent;overflow:hidden;padding:0!important}
+.about .img_about{float:right;width:70%;}
+.about .about_content{width:30%;float:left;text-align:left;padding:107px 20px 0 0;background:transparent;}
+.navbarcontainer.active > div{padding:8px 60px;}
+._menu{overflow:hidden;padding-top:90px;}
+.box_ordersummary{background:#f8f8f8;border-left:0;}
+.txt_ordersummary{text-align:left;padding-top:30px;font-weight:400;letter-spacing:normal;}
+.box_ordersummary{position:relative;}
+.box_ordersummary:after{width:500px;background:#f8f8f8;position:absolute;content:'';top:0;right: -500px;height: 100%;}
+.box_ordersummary .text-align-center._mt35 .blackbtn{min-width:190px;text-align:center;}
+#menu_ordersection .text-align-center._mt35{text-align:left;}
+.psection.dine-more{padding-bottom:0;padding-top:0;}
+.psection.dine-more > ._960px {padding-top:100px}
+.res_menu{margin-bottom:0;}
+}
+@media (max-width: 991px){
+	.videotitle_homepage{font-size:1.871875em;padding:25px;}
+	.videotitle_homepage span{padding-bottom:4px;}
+	.link_hamburger{right:20px;}
+	.i_hamburger{width:25px;}
+	.pageheader:not(.smallheight) .link_hamburger{top:17px;}
+	.pageheader .headerlink_topright{right:50px;}
+	.pageheader ._brandname img{max-width:70px;margin-top:7px;}
+	.aboutsection{padding:0!important;}
+	.aboutsection .about_content{padding:0 10px;text-align:left;}
+	.about_content .txt_about{padding:13px 0 61px;}
+	._menu .sectiontitle{margin-bottom:0;}
+	.res_menu > div:first-child.dmdeal + div > .tabs a, .res_menu > div:first-child > .tabs a, .res_menu > div > .tabs.active a{color:#fa5d00;}
+	.tabs.mobilemenutabs.active a:after, .dmdeal + div > .tabs:not(.deactive) a:after, .res_menu > div:first-child > .tabs:not(.deactive) a:after{border-color:#fa5d00;}
+	.res_menu > div:first-child + div > .tabs.deactive a, .dmdeal + div > .tabs.deactive a, .res_menu > div:first-child > .tabs.deactive a, .mobilemenutabs a{font-weight:400!important;color:#000;}
+	.psection.dine-more{padding-top:0;}
+	.dine-more > ._960px{padding-top:90px;}
+	#viewmap{min-height:200px}
+	#viewmap, .panel_contactsection{width:100%;}
+	.contact.psection ._960px{padding:0;}
+	.callout_contact{width:100%;padding:10px 10px 30px;}
+	.callout_contact .btn_contactreserve{margin:30px 0 27px;}
+	.footer{text-align:center;}
+	.dine-more .panel_dinemore_learn{padding-bottom:50px;}
+	.pageheader.smallheight{background:#000;}
+	.dropdown_mobile{background:#0c100e;}
+}
+@media (min-width: 1025px){
+	.home{background-attachment:fixed;}
+}

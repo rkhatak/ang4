@@ -1,0 +1,17 @@
+<div ng-controller = "GlobalController as Global">
+   <div ng-include="getPartial('common', 'header.html')"></div>
+   <div ng-repeat="page in pages.list">
+      <div ng-include="getPartial(page.filepath, page.file)"></div>
+   </div>
+    <app-popup></app-popup>
+<!--    <scroll-event-fire autoscroll="true"></scroll-event-fire>-->
+<div class="footer text-align-center clearfix">
+                <div class="_960px" >
+                    <!--<a href="/" class="brandfooterlogo"><img src="theme/spice/images/brandfooterlogo.png" alt=""></a>-->
+                    <a ng-show="!isEmpty(fdata.facebook_url)" href="{{fdata.facebook_url}}" target="_blank" class="_mr30"><i class="gi i_fb"></i></a>
+                    <a  ng-show="!isEmpty(fdata.twitter_url)" href="{{fdata.twitter_url}}" target="_blank" class="_mr30"><i class="gi i_twitter"></i></a>
+                    <a  ng-show="!isEmpty(fdata.instagram_url)" href="{{fdata.instagram_url}}" target="_blank"><i class="gi i_instagram"></i></a>
+                </div>
+            </div> 
+</div>
+ 

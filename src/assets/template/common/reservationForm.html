@@ -1,0 +1,142 @@
+<div class="_p30 popup_reservetable">
+  <form name="bookform" id="bookform" method="post">
+   <div ng-show="isReservationTime" class="formstep1">
+      <p class="sectiontitle _mb40">reserve a table</p>
+      <div class="form_bookatable_level1">
+        <div class="row">
+         <div class="update_people_bookatable col-md-4 col-sm-4">
+            <div class="reserveinputstyle">
+               <select name="people" id="people" ng-model="reservationdata.people" ng-init="reservationdata.people = reservationdata.people || '2'">
+                   <option value="2">2 people</option>
+                  <option value="3">3 people</option>
+                  <option value="4">4 people</option>
+                  <option value="5">5 people</option>
+                  <option value="6">6 people</option>
+                  <option value="7">7 people</option>
+                  <option value="8">8 people</option>
+                  <option value="9">9 people</option>
+                  <option value="10">10 people</option>
+               </select>
+            </div>
+         </div>
+            
+         <div class="col-md-4  col-sm-4">
+            <div class="reserveinputstyle">
+                <md-datepicker ng-init="reservationdata.myDate = reservationdata.myDate || 'myDate'" ng-model="myDate" md-min-date="minDate" ng-change="dateChange(myDate)" name="datepicker1" id="datepicker1" md-placeholder="Enter date"></md-datepicker>
+            </div>
+         </div>
+         <div class="col-md-4 col-sm-4 position-relative">
+            <div class="reserveinputstyle">
+               <input ng-click="showTimeSlot()" type="text" name="timepicker1" id="timepicker1" readonly >
+               <div class="timepicker_custom outerDIVclose">
+                  <ul class="t_timepicker unstyled clearfix">
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+         <div class="text-align-center _mt35">
+            <input type="button" value="Reserve it" name="btnbook" id="btnbook" class="ubtn" ng-click="showReservationForm()">
+         </div>
+      </div>
+   </div>
+   <div ng-show="isShowReservation" class="formstep2 forreserve">
+   <p class="sectiontitle _mb40">reserve a table</p>
+   <div class="text-align-center">
+     <p class="msgreservation _mb15">Your reservation is almost complete</p>
+     <a href="javascript:void(0)" class="ubtn blackbtn y-editReservation" ng-click="hideReservationForm()">edit</a>
+     <p class="txt_reservationwarning _fs12">Reservations are based upon availability at individual restaurants and they reserve the right to accept or decline any and all reservations.</p>
+   </div>
+   <div class="form_reservetable">
+   <em class="txt_mandatorymessage"><span class="color_red">*</span> Mandatory Fields</em>
+    <div class="row">
+      <p class="col-md-4 col-sm-4 col-xs-12 text-align-md-right txt_checkoutlabel ">Name<span class="error-color">*</span></p>
+      <div class="col-md-8 col-sm-8 col-xs-12 inputtwo">       
+        <input type="text" ng-model="redata.first_name_r" name="first_name_r" id="first_name_r" placeholder="First Name" value="" class="require">
+        <input type="text" ng-model="redata.last_name_r" name="last_name_r" id="last_name_r" placeholder="Last Name" value="" class="require" >
+        <p class="error-message new-location-msg hide">Sorry, We don't talk to strangers</p>
+        <input type="hidden" id="y-reservation-id" value="">
+      </div>
+    </div>
+   <div class="row">
+    <p class="col-md-4 col-xs-12 col-sm-4 text-align-md-right txt_checkoutlabel">Phone<span class="error-color">*</span></p>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="phoneno_code"><input type="text" ng-model="redata.phone_no_r" name="phone_no_r" id="phone_no_r" value="" maxLength="11" class="require" pattern="[0-9]*" ><em class="_fs10 txt_checkout_notification"></div>We only call in case of food emergencies (i.e. Order & reservation changes, clarifications or cancellations)</em>
+      <p class="error-message new-location-msg hide y_error_phone">We promise; No prank calls</p>
+    </div>
+   </div>
+   <div class="row">
+    <p class="col-md-4 col-sm-4 col-xs-12 text-align-md-right txt_checkoutlabel">Email<span class="error-color">*</span></p>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <input type="text" name="email_r" ng-model="redata.email_r" id="email_r" value="" class="require">
+      <p class="error-message reservationdata_email_r hide">Hey, you forgot something</p>
+    </div>
+  </div>
+   <div class="row _m0">
+      <p class="col-md-4 col-xs-12 col-sm-4 text-align-md-right txt_checkoutlabel">Special Instructions</p>
+      <div class="col-md-8 col-xs-12 col-sm-8 panel_instructions panel_specialinstructions">
+            <label class="inputfield custom_checkbox" id="req_boothID">
+              <input type="checkbox" value="Request a booth" name="instructions[]" id="req_booth" >
+               <span class="control_indicator"></span>
+               Request a Booth
+            </label>
+
+            <label class="inputfield custom_checkbox" id="req_kidplaceID">
+              <input type="checkbox" value="Request kid's place settings" name="instructions[]" id="req_kidplace" >
+               <span class="control_indicator"></span>
+               Request kid's place settings
+            </label>
+
+            <label class="inputfield custom_checkbox" id="req_nocenterpieceID">
+              <input type="checkbox" value="Request no centerpiece"  name="instructions[]" id="req_nocenterpiece" >
+               <span class="control_indicator"></span>
+               Request no centerpiece
+            </label>
+
+            <textarea id="comment" name="own_instruction" class="own_instruction special_instruction special_instruction" maxlength="255" rows="5" placeholder="Enter your own"></textarea>
+
+            <p class="txt_word_count" style="visibility: hidden;">&nbsp;</p>
+      </div>
+   </div>
+   </div>
+    <p class="text-align-center"><a href="javascript:void(0)" id="btnconfirm" class="ubtn" ng-click="sendReservation()">Request reservation</a><span class="lineloader r_confirm_loader hide"><span></span><span></span><span></span></span></p>
+   </div>
+   <div class="formstep3 thanku text-align-center hide" id="formstp3">
+        <p class="sectiontitle _mb40">reservation summary</p>
+        <div class="row box_typeofplace">
+            <p class="col-md-4 col-xs-12 col-sm-4"><span id="y-party-size"></span> people</p>
+            <p class="col-md-4 col-xs-12 col-sm-4 y-reserve-date"></p>
+            <p class="col-md-4 col-xs-12 col-sm-4 y-reserve-time"></p>
+        </div>
+        <em class="_fs11 txt_reservationsbased">Reservations are based upon availability at individual restaurants and they reserve the right to accept or decline any and all reservations.</em>
+        <p class="txt_ordersummary">Thank you for your reservation.</p>
+        <p class="txt_receiptid">Your receipt # is <span class="y-recieptN"></span> </p>
+        <p class="txt_receiptmes _fs12">We will review your request and send you confirmation after checking availability. If you have any issues or want help, feel free to call us at {{currentRestaurant.phone_no}}</p>
+
+        <div class="_paneladdtocalendar">
+        <a href="javascript:void(0)" class="ubtn blackbtn calendarClick" id="calendarClick-1" data-id="1" data-starttime="2017-4-10" data-endtime="2017-4-12" data-title="tedt" data-description="nn" data-location="qbc" ng-click="calendarClick()">add to calender</a>
+          <div class="googleCalender"></div>              
+        </div>
+       <div class="send_invites">
+          <p class="txt_ordersummary _mt70 _p0">Let Your Friends Know About Your Culinary Discovery!</p>
+            <em class="_fs10 display-block">You found a great spot. Invite your friends to bask in the glory that is your reservation and to dine with the God (or Goddess) of fine food.</em>
+            <div class="text-align-left">
+                <p class="_mt30 _fontarial _fs12 _pb3">Invite Friends to Join Your Reservation *<br /><strong>Enter email address Separated by "," or ";"</strong></p>
+                <input id="emails" size="50" type="text" class="tags email invisible" value="" />
+                <em class="error-color _fs10  emails-error hide"></em>
+
+                <p class="_fontarial _fs12 _pb3 _pt10">Include a Personalized Message</p>
+                <textarea id="send-reservation-msg" name="own_instruction" placeholder="" autocomplete="off" rows="5"></textarea>
+                <em class="error-color _fs10  msg-error hide">Hey, you forgot something</em>
+                <p class="text-align-center _mt30"><a href="javascript:void(0)" class="ubtn blackbtn y-send-invitation" ng-click="sendInvitation()">SEND</a><span class="lineloader confirm_loader hide"><span></span><span></span><span></span></span></p>
+            </div>
+        </div>    
+    </div>
+    <div class="sendinvite-thank hide">
+        <p class="txt_yourinvites txt_ordersummary _mt70 text-align-center">Your invite(s) have gone out to<br />
+        <strong class="toBeSendContact _fontarial"></strong></p>
+        <p class="txt_yourinvites_expect _fs14 text-align-center">Expect RSVPs soon!</p>
+        <!--<p class="text-align-center"><a href="javascript:void(0)" title="INVITE MORE people to join your party" class="orangebtn invitemore">INVITE MORE people to join your party</a></p>-->
+    </div>
+</form>
+</div>

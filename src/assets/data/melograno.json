@@ -1,0 +1,36 @@
+{
+    "status": "success",
+    "message": "Details of Gammeeok theme",
+    "data": [
+        {
+            "tabname": "Home",
+            "tabslug": "home",
+            "file": "home.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Gallery",
+            "tabslug": "gallery",
+            "file": "gallery.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Dine & More",
+            "tabslug": "dine-more",
+            "file": "dine-more.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Contact",
+            "tabslug": "contact",
+            "file": "contact.html",
+            "filepath": "common"
+        }
+    ],
+    "home": {
+            "title": "Chef Alberto Tartari",
+            "homebg": "http://melograno.munchado.in/theme/melograno/images/c_bg_homepage.jpg",
+            "video": "",
+            "nextpage": "about"
+        }
+}

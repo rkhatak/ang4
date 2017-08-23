@@ -1,0 +1,7 @@
+<div id="{{page.tabslug}}" ng-controller = "GalleryController as gallery" class="bg_section psection">
+	<div class="_960px">
+                    <div class="owl-carousel galleryslider">
+                       <div class="item" ng-repeat="img in galleries"><img ng-src="{{img.imgurl}}" alt="{{img.title}}" class="img-responsive"></div>
+                    </div>
+                </div>
+</div>

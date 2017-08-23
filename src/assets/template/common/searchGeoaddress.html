@@ -1,0 +1,25 @@
+<div class="_p30">    
+             <p class="txt_m_enteryouraddress _fs14">Before proceeding to order, please enter your address to verify if its in the restaurant&#180;s coverage area.
+             <strong class="txt_delivery_address">{{currentRestaurant.delivery_desc}}</strong></p>
+              <div class="m_location_verify">
+                <i class="i_circle i_wrong">+</i>
+                <input type="text" ng-keydown="seoAddressSeachByLocation()" id="searchTextField" class="input_delivery_address" value="{{searchAddress}}" placeholder="(Ex: 79 Madison Street, New  York...)"/>
+                <input type="hidden" id="fullAddress" value=""/>
+                <input type="hidden" id="addressLat" value=""/>
+                <input type="hidden" id="addressLng" value=""/>
+                <input type="hidden" id="addressType" value=""/>
+              </div>
+              <div class="but_m_actions">
+                <a href="javascript:void(0)" class="ubtn blackbtn t-verify_proceed" ng-click="getLatByAddress()">verify & proceed to order</a>
+                <span>OR</span>
+                <a href="javascript:void(0)" class="ubtn t_proceed_takeout" ng-click="getCheckTakeout()">order takeout</a>
+              </div>
+              <span class="lineloader hide">  <span></span><span></span><span></span></span>
+               <div class="txt_vpsorry">
+               
+               <p ng-if="rightAddress" class="t-right_address error_delivery_zone"><i class="i_circle i_right"></i>Good News! This restaurant will deliver to you. Close this window if it hasn't closed itself already.</p>
+               <p ng-if="wrongAddress" class="t-wrong_address error_delivery_zone"><i class="i_circle i_wrong">+</i>Sorry, you&#180;re outside this restaurant&#180;s delivery zone.</p>
+               <p ng-if="invalidAddress" class="t-invalid_address error_delivery_zone txt_invalid_address error-message hide">Hey! We need to know your full street address (ex: 79 Madison Avenue, New York) so we can find you all the great restaurants and food spots that will deliver to you. We promise not to drop by unannounced. 
+               </p>
+            </div>
+        </div>

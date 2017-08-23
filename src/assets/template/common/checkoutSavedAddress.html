@@ -1,0 +1,10 @@
+<label class="custom_radio _fontarial _fs14 list-save-address">
+        <input ng-disabled="isdtNameDisabled(savedAddress.address_can_deliver)" name="existing-address" type="radio" value="{{savedAddress.id}}" ng-click="savedAddressOrder($event)">
+        <span class="control_indicator"></span>{{savedAddress.address_name}}<br>
+            <span>{{savedAddress.street}}, , {{savedAddress.city_name}}, {{savedAddress.state}}, {{savedAddress.zipcode}}</span><br>
+            Ph: {{savedAddress.phone}}
+            <p class="d_location location-save-address _fs12" ng-if="savedAddress.city_id != savedAddress.current_city_id">This address is well beyond the city limits. Not even Santa would take this order.</p>    
+            <p class="d_location location-save-address _fs12" ng-if="savedAddress.can_deliver===false || savedAddress.google_addrres_type !=='street'">Sorry, this address is not within the restaurant's delivery zone.</p>
+            <p class="d_location location-save-address _fs12">This location is about <strong>{{savedAddress.distance}}</strong> miles away from the restaurant.
+                <span ng-if="savedAddress.distance <= 3">That's likely within their delivery zone!</span></p>
+    </label>

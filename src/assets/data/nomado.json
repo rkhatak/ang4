@@ -1,0 +1,12 @@
+{
+    "status": "success",
+    "message": "Details of dummy theme",
+    "data": [
+        {
+            "tabname": "Menu",
+            "tabslug": "menu",
+            "file": "menu.html",
+            "filepath": "common"
+        }
+    ]
+}

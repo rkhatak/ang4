@@ -1,0 +1,30 @@
+{
+    "status": "success",
+    "message": "Details of demo theme",
+    "data": [
+        {
+            "tabname": "About",
+            "tabslug": "about",
+            "file": "about.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Menu",
+            "tabslug": "menu",
+            "file": "menu.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Gallery",
+            "tabslug": "gallery",
+            "file": "gallery.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Contact",
+            "tabslug": "contact",
+            "file": "contact.html",
+            "filepath": "common"
+        }
+    ]
+}

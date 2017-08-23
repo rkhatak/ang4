@@ -1,0 +1,30 @@
+{
+    "status": "success",
+    "message": "Details of dummy theme",
+    "data": [
+        {
+            "tabname": "Menu",
+            "tabslug": "menu",
+            "file": "menu.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Gallery",
+            "tabslug": "gallery",
+            "file": "gallery.html",
+	    "filepath": "themes"
+        },
+	{
+            "tabname": "About",
+            "tabslug": "about",
+            "file": "about.html",
+	    "filepath": "common"		
+        },
+        {
+            "tabname": "Contact",
+            "tabslug": "contact",
+            "file": "contact.html",
+	    "filepath": "common"		
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+<div class="about psection">
+                <div class="text-align-center aboutsection">
+                    <div class="about_content" *ngIf="overview">
+                        <p class="sectiontitle">about</p>
+                        <p class="txt_about" [innerHtml]="overview.about.detail"></p>
+                        <p class="txt_typeplace">type of place</p>
+                        <ul class="typeofplace unstyled clearfix">
+                            <li *ngFor="let feature of overview.features.detail">
+                                <a href="javascript:void(0)">
+                                    <i class="{{getIcon(feature.features_key)}}"></i>
+                                    <p>{{feature.features}}</p>
+                                </a>
+                            </li>                           
+                        </ul>
+                        <input type="button" class="ubtn btn_readourstory" (click)="readStory($event)" value="Read our story">
+                    </div>            
+                </div>
+                <div *ngIf="showStory" class="_960px storysection">
+                  <app-story [showStory]="showStory" id="story"></app-story>
+                </div>
+            </div>

@@ -1,0 +1,37 @@
+{
+    "status": "success",
+    "message": "Details of Gammeeok theme",
+    "data": [
+        {
+            "tabname": "Home",
+            "tabslug": "home",
+            "file": "home.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "About",
+            "tabslug": "about",
+            "file": "about.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Menu",
+            "tabslug": "menu",
+            "file": "menu.html",
+            "filepath": "common"
+        },
+        {
+            "tabname": "Contact",
+            "tabslug": "contact",
+            "file": "contact.html",
+	    "filepath": "common"		
+        }
+        
+    ],
+    "home": {
+            "title": "Spice is New York City’s Choice for Authentic Thai Cuisine since 1997.",
+            "homebg": "https://player.vimeo.com/video/208441542?background=1",
+            "video": "https://player.vimeo.com/video/208439283?background=1",
+            "nextpage": "about"
+        }
+}

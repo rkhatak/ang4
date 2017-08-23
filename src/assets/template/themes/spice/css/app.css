@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i&subset=cyrillic,cyrillic-ext,latin-ext');
+.videotitle_homepage{font:3.1875em 'Merriweather', serif, arial;font-weight:300;font-style:italic;text-transform:none;}
+.pageheader ._960px{padding:10px 0 12px;}
+.pageheader ._brandname{margin-bottom:9px;}
+/**landingsite**/
+.pageheader.smallheight ._brandname img{width:53px;}
+.res_menu .item_contentpanel .txt_restitle, .sectiontitle{font:2.75em 'Merriweather', serif, arial;text-transform:none;font-weight:300;font-style:italic;letter-spacing:normal;}
+/**Home page**/
+.home .txt_homepage{z-index:2;}
+.home{background-position:top center;}
+.home:after{position:absolute;top:0;left:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.2);content:'';z-index:1;}
+
+.contact_resphoneno{font-style:normal;font-weight:700;color:#939393;;}
+.txt_typeplace, .typeofplace{display:none;}
+.owl-dots{display:none;}
+
+
+
+.promo_homepage{
+    font:1.1875em 'Merriweather', serif, arial;
+    border-top: 1px solid #fff;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.discount{color:#ef4242;}
+.validity{
+    font:0.675em 'Merriweather', serif, arial;
+    color: #eaeaea;
+    font-weight: 100;
+    margin-top: 10px;
+    text-align: center;
+    background-color: 
+}
+.panel_spring_cocktail{background:#404851;margin-top:40px;}
+.img-springcocktail{min-height:420px;background-size:cover;background-color:#ddd;background-repeat:no-repeat;}
+.txt_spring_cocktail{padding:40px;}
+.txt_spring_cocktail a{display:block;color:#fff;font:300 1.125em 'Merriweather', serif, arial;text-decoration:none;margin-bottom:10px;font-style:italic;}
+.txt_spring_cocktail a:last-child{margin-bottom:0;}
+.txt_spring_cocktail a span{color:#b0afaf;font-style:normal; font:0.875em arial;display:none;}
+.txt_spring_cocktail a:hover span{color:#ffffff;}
+
+.springcocktail,.springcocktail .owl-item{-webkit-tap-highlight-color:transparent;position:relative}
+.springcocktail .owl-stage{position:relative;-ms-touch-action:pan-Y;-moz-backface-visibility:hidden}
+.springcocktail .owl-stage:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0}
+.springcocktail .owl-stage-outer{position:relative;overflow:hidden;-webkit-transform:translate3d(0,0,0)}
+.springcocktail .owl-item,.owl-carousel .owl-wrapper{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0)}
+.springcocktail .owl-item{min-height:1px;float:left;-webkit-backface-visibility:hidden;-webkit-touch-callout:none}
+.springcocktail .owl-item img{display:inline-block;max-width:initial}
+.springcocktail .owl-dots.disabled{display:none}
+.no-js .springcocktail,.owl-carousel.owl-loaded{display:block}
+.springcocktail .owl-dot,.owl-carousel .owl-nav .owl-next,.owl-carousel .owl-nav .owl-prev{cursor:pointer;cursor:hand;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.springcocktail.owl-loading{opacity:0;display:block}
+.springcocktail.owl-hidden{opacity:0}
+.springcocktail.owl-refresh .owl-item{visibility:hidden}
+.springcocktail.owl-drag .owl-item{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.springcocktail.owl-grab{cursor:move;cursor:grab}
+.springcocktail.owl-rtl{direction:rtl}
+.springcocktail.owl-rtl .owl-item{float:right}
+.springcocktail .animated{animation-duration:1s;animation-fill-mode:both}
+.springcocktail .owl-animated-in{z-index:0}
+.springcocktail .owl-animated-out{z-index:1}
+.springcocktail .fadeOut{animation-name:fadeOut}@keyframes fadeOut{0%{opacity:1}100%{opacity:0}}
+.springcocktail .owl-item .owl-lazy{opacity:0;transition:opacity .4s ease}
+.springcocktail .owl-item img.owl-lazy{transform-style:preserve-3d}
+
+
+.contact_resname{font:30px 'Merriweather', serif, arial;font-style:italic;}
+.contact_resaddress{min-height:17px;}
+.contact_resphoneno{font-weight:normal;color:#666666;display:inline-block;text-decoration:none;}
+
+/**About page
+.typeofplace{max-width:305px;}
+/**Menu page**/
+
+.res_menu .item_contentpanel .txt_restitle{font-size:1.125em;}
+
+@media (max-width: 767px){
+    .promo_homepage{
+    font:0.875em 'Merriweather', serif, arial;
+    }
+    .validity{
+    font:0.575em 'Merriweather', serif, arial;
+}
+	.videotitle_homepage{font-size: 1.375em;}
+	.res_menu .item_contentpanel .txt_restitle{font-size:0.875em;}
+	.sectiontitle{font-size:1.25em;color:#000;}
+	.img-springcocktail{min-height:230px}
+	.panel_spring_cocktail{margin-top:20px}
+	.txt_spring_cocktail a{font-size:1em;}
+
+	:not(.landingsite) .callout_contact{width:100%;padding:0;}
+}
+@media (max-width: 991px){
+	.pageheader ._960px{padding:0}
+	.pageheader ._brandname img{margin:7px}
+	.txt_spring_cocktail{padding:20px;}
+    .promo_homepage{
+    margin-top: 40px;
+    padding: 20px 10px 0px;;
+   
+}
+    .validity{
+    padding: 0px 10px;
+}
+}
+@media (min-width: 992px){
+	#spring_cocktail ._960px{width:initial;}
+	.navbar a[data-target="spring_cocktail"]{border:1px solid rgba(255, 255, 255, 0.5);line-height:24px;padding:0 10px;margin-right:24px;}
+	.springcocktail .owl-nav{display:none}
+}

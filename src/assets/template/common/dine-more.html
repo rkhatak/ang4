@@ -1,0 +1,114 @@
+<div id="{{page.tabslug}}" ng-controller = "DineMoreController as dineMore" class="bg_section psection">
+	
+                <div class="_960px text-align-center" >
+                    <p class="title_dine">Dine &amp; More</p>
+                    <p class="txt_makeevery">MAKE EVERY MEAL SPECIAL</p>
+                    <div class="panel_muchmore">
+                        <div class="form_panel_muchmore">
+                            <p class="txt_joinourdine">Join Our Dine &amp; More Rewards Program</p>
+                            <div ng-if='!is_logged_in' class="text-align-center _pt20">
+                                <a href="javascript:void(0)"  class="ubtn y_goto_dmpage" target="_blank" ng-click='userRegister()'>JOIN NOW!</a>
+                            </div>
+                         </div>
+                    </div>
+                    <p class="txt_savor">Savor Your Meal Moments</p>
+                    <p class="txt_everymeal">Every meal you share should be special. When you dine in or out, you’re not looking  just to eat; you’re looking for an experience. Our Dine &amp; More rewards program helps you transform your meals into something more with exclusive specials, unique meals and points you can use towards free food and so much more.</p>
+                    <div class="text-align-center _mt30  _pb30 panel_dinemore_learn">
+                        <a href="javascript:void(0)" class="ubtn blackbtn btn_dinemore_learn" ng-click="learnMore()">Learn More</a>
+                    </div>
+                    <div ng-show="dineLearnMore" class="panel_dinein_benefit">
+                        <p class="title_dinein_benefit"><span>Get Treated Like the VIP You Are</span></p>
+                        <div class="border_dinein_benefit">
+                            <p class="txt_wearecelebrating">We’re celebrating you and your excellent taste with exclusive perks*.</p>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="vip_benefit fright">
+                                        <span>Get Invites to<br><span>CHEF EVENTS</span></span>
+                                        <span>Receive<br><span>EXCLUSIVE SPECIALS</span></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="vip_benefit">
+                                        <span>Enjoy<br><span>PRIORITY SEATING</span></span>
+                                        <span>Attend New<br><span>MENU TASTINGS</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="txt_perks">*Perks vary from restaurant to restaurant</p>
+                            <p class="title_dinein_benefit _pget"><span>Get More with Your Meals</span></p>
+                            <ul class="pointtable_benefit unstyled">
+                                <li>
+                                    <i class="i_vip i_reg"></i>
+                                    <p class="txt_bp">100</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">REGISTERING TODAY</p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_add"></i>
+                                    <p class="txt_bp">50</p>
+                                <u>ADDITIONAL BONUS POINTS</u>
+                                <p class="txt_at">PLACING YOUR FIRST ORDER</p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_ref"></i>
+                                    <p class="txt_bp">250</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">REFERRING A FRIEND</p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_checking"></i>
+                                    <p class="txt_bp">25</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">CHECKING IN</p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_writing"></i>
+                                    <p class="txt_bp">100</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">WRITING A REVIEW</p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_making"></i>
+                                    <p class="txt_bp">100</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">MAKING A RESERVATION</p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_ord"></i>
+                                    <p class="txt_bp">100</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">ORDERING $50 A MEAL<span>*2 POINTS PER DOLLAR SPENT</span></p>
+                                </li>
+                                <li>
+                                    <i class="i_vip i_uplo"></i>
+                                    <p class="txt_bp">25</p>
+                                <u>POINTS</u>
+                                <p class="txt_at">UPLOADING PICTURES</p>
+                                </li>
+                                <li class="minheight">
+                                    <div class="txt_style_point i_vip"></div>
+                                </li>
+                                <li class="minheight">
+                                    <div class="txt_style_point i_vip"></div>
+                                </li>
+                                <li class="minheight">
+                                    <div class="txt_style_point i_vip"></div>
+                                </li>
+                            </ul>
+                            <p class="txt_first30">*First 30 Days Bonus</p>
+                        </div>
+                        <div class="panel_muchmore second">
+                            <div class="form_panel_muchmore">
+                                <p class="txt_becomeamemeber">Become A Member for Free Today!</p>
+                                <div class="y_loyatiform">
+                                    <p class="txt_joinourdine">If you aren’t enrolled yet, visit us today to join or register now</p>
+                                    <div ng-if='!is_logged_in' class="text-align-center _pt20">
+                                        <a href="javascript:void(0)"  class="ubtn y_goto_dmpage" target="_blank" ng-click='userRegister()'>JOIN NOW!</a>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+              
+</div>

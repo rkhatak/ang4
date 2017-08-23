@@ -1,0 +1,56 @@
+<div ng-controller = "GlobalController as Global">
+ <div ng-include="getPartial('common', 'header.html')"></div>   
+<div ng-controller="MymunchController as mymunch">
+<div class="mymunchado _mt70">
+         <div class="_960px">
+            <p class="title_mymunchado txt_mypoints">my points</p>
+            <div class="row point_panel">
+               <div class="col-md-2 col-xs-6">
+                  <p class="_fs14">Redeemable Points</p>
+                  <strong class="txt_pointstyle _fontarial">{{points.points - points.redeemed_points}}</strong>
+               </div>
+               <div class="col-md-2 col-xs-6 _m0-xs">
+                  <p class="_fs14">Cash Available</p>
+                  <strong class="txt_pointstyle _fontarial">${{(points.points - points.redeemed_points)/100}}</strong>
+               </div>
+               <div class="col-md-2 col-xs-6">
+                  <p class="_fs14">Total Points</p>
+                  <strong class="_fontarial _fs20">{{points.points}}</strong>
+               </div>
+               <div class="col-md-2 col-xs-6 _m0-xs">
+                  <p class="_fs14">Redeemed Points</p>
+                  <strong class="_fontarial _fs20">{{points.redeemed_points}}</strong>
+               </div>
+               <div class="col-md-4 text-align-md-right col-xs-12">
+                  <p class="_fs14">&nbsp;</p>
+                  <a href="javascript:void(0)" class="ubtn blackbtn _mt17" ng-click="getActivityArchive()">activity archive</a>
+               </div>
+            </div>
+            <p class="txt_redeempoint">You can redeem your points for up to ${{(points.points - points.redeemed_points)/100}} towards your next online order.</p>
+            <p class="title_mymunchado">past orders</p>
+            
+            <div class="row order_list display-flex-none-xs display-flex" ng-repeat="order in liveorderData">
+               <div class="col-md-5" ng-bind-html="order.description | htmlToPlaintext"></div>
+               <div class="col-md-2 col-xs-6 _pol">{{order.delivery_time}}</div>
+               <strong class="col-md-2 col-xs-6 _m0-xs text-align-xs-right  _pol">$ {{order.total_amount}}</strong>
+               <div class="col-md-3 text-align-md-right text-align-xs-center"><a href="javascript:void(0)" class="ubtn blackbtn" data-id="{{order.id}}" ng-click="viewOrder($event)">View</a></div>
+            </div>
+            
+            <div class="row order_list display-flex-none-xs display-flex" ng-repeat="order in archiveorderData">
+               <div class="col-md-5" ng-bind-html="order.description | htmlToPlaintext"></div>
+               <div class="col-md-2 col-xs-6 _pol">{{order.delivery_time}}</div>
+               <strong class="col-md-2 col-xs-6 _m0-xs text-align-xs-right  _pol">$ {{order.total_amount}}</strong>
+               <div class="col-md-3 text-align-md-right text-align-xs-center"><a href="javascript:void(0)" class="ubtn blackbtn" data-id="{{order.id}}" ng-click="viewOrder($event)">View</a></div>
+               <div class="col-md-3 text-align-md-right text-align-xs-center"><a href="javascript:void(0)" class="ubtn blackbtn" data-id="{{order.id}}" ng-click="rReorder($event)">reorder</a></div>
+               <p class="r_error_{{order.id}}"></p>
+            </div>
+            <div class="row order_list display-flex-none-xs display-flex" ng-show="!archiveorderData.length && !liveorderData.length">
+               <div class="col-md-5">No Record Found</div>
+            </div>
+
+
+         </div>
+      </div>
+</div>
+ <app-popup></app-popup>
+</div>    

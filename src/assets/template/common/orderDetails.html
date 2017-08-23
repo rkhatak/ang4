@@ -1,0 +1,115 @@
+<div class="description_today_table_res">
+     <div class="nano orderDetail_scrollbarHeight" style="width:100%;">
+        <div class="content">
+           <div id="discription-order-detail">
+              <div class="row-fluid dashboard-order-summary customscrollbarorder">
+                 <div class="span12" id="print-order-summary">
+                    <table cellpadding="5" class="table mrgB7 reservation-detail" border="1" style="border-collapse:collapse;">
+                       <tbody>
+                          <tr>
+                             <td width="25%">Order No:</td>
+                             <td colspan="2">{{orderData.receipt_no}}</td>
+                          </tr>
+                          <tr>
+                             <td>Order type:</td>
+                             <td colspan="2">{{orderData.order_Type}}</td>
+                          </tr>
+                          <tr ng-if='orderData.order_type=="Delivery"'>
+                             <td>Delivery to:</td>
+                             <td colspan="2">{{orderData.delivery_address}}</td>
+                          </tr>
+                          
+                          
+                          <tr>
+                             <td>Time of Order:</td>
+                             <td colspan="2">{{orderData.time_of_order}}</td>
+                          </tr>
+                          <tr>
+                             <td>Expected Time to {{orderData.order_type}}:</td>
+                             <td colspan="2">{{orderData.time_of_delivery}}</td>
+                          </tr>
+                          <tr ng-repeat="o_items in orderData.order_details">
+                             <td colspan="3">
+                                <div class="iteamDiv">
+                                   <ul>
+                                      <li class="productdiv" ng-bind-html="o_items.item | htmlToPlaintext">
+                                        {{(o_items.item_price_desc)?o_items.item_price_desc:''}} </li>
+                                      <li class="quantityDiv">{{o_items.quantity}}</li>
+                                      <li class="priceQuantity">${{o_items.total_price}}</li>
+                                   </ul>
+                                   
+                                   <div ng-if='o_items.special_instruction!=""' class="subtxt">({{o_items.special_instruction}}) </div>
+                                   
+                                   <ul ng-if='o_items.addon.length>0' ng-repeat='addon in o_items.addon' class="iteamDivAddon">
+                                      <li class="productdivAddon" style="float:left;text-aligh:left;width:70%;"> + {{addon.addon_name}}</li>
+                                      <li class="quantityDivAddon" style="width:auto;text-align:center;float:left;">{{addon.addon_quantity}}</li>
+                                      <li class="priceQuantityAddon" style="float:right;width:auto; text-aligh:right;font-size:13px;">${{addon.addon_total}}</li>
+                                   </ul>
+                                   
+                                   <ul>
+                                      <li class="productdiv">&nbsp;</li>
+                                      <li>&nbsp;</li>
+                                      <li class="priceQuantityTotal" style="float:right;width:auto; text-aligh:right;font-size:13px;">${{o_items.total_item_amt}}</li>
+                                   </ul>
+                                   
+                                </div>
+                             </td>
+                          </tr>
+                          <tr ng-if='orderData.user_comments || orderData.special_checks'>
+                             <td class="specal-instruction-box" colspan="3">
+                                <strong>{{orderData.order_type}} Instructions</strong>
+                                <p ng-if="orderData.special_checks!=''">- {{orderData.special_checks | specialInstruction}}</p>
+                             </td>
+                          </tr>
+                         
+                          <tr>
+                             <td colspan="3">
+                               <div class="subtotal" style="min-width:150px; float:right!important;">
+                                   <table class="table" style="width:100% !important;font-family:arial;">
+                                      <tr>
+                                         <td class="bordernone">Subtotal:</td>
+                                         <td class="subTotalRightTxt bordernone" align="right">${{orderData.order_amount}}</td>
+                                      </tr>
+                                      <tr ng-if='orderData.deal_discount!=="0.00"'>
+                                         <td>Deal Discount:</td>
+                                         <td class="subTotalRightTxt" align="right">${{orderData.deal_discount | number : 2}}</td>
+                                      </tr>
+                                      
+                                      
+                                      <tr ng-if='orderData.order_type=="Delivery" && (delivery_charge=="" ||delivery_charge=="0.00")'>
+                                         <td>Delivery:</td>
+                                         <td class="subTotalRightTxt" align="right">Free</td>
+                                      </tr>
+                                      <tr ng-if='orderData.order_type=="Delivery" && (delivery_charge!=="" || delivery_charge > 0)'>
+                                         <td>Delivery:</td>
+                                         <td class="subTotalRightTxt" align="right">${{orderData.delivery_charge | number : 2}}</td>
+                                      </tr>
+                                      <tr ng-if='orderData.tax!=="0.00"'>
+                                         <td>Tax:</td>
+                                         <td class="subTotalRightTxt" align="right">${{orderData.tax}}</td>
+                                      </tr>
+                                     <tr ng-if='orderData.tip_amount!=="0.00"'>
+                                         <td>Tip:</td>
+                                         <td class="subTotalRightTxt" align="right">${{orderData.tip_amount}}</td>
+                                      </tr>
+                                     <tr ng-if="orderData.promocode_discount!=='0.00'">
+                                         <td>Promo Code Discount:</td>
+                                         <td class="subTotalRightTxt" align="right">${{orderData.promocode_discount | number : 2}}</td>
+                                      </tr>
+                                      
+                                        <tr>
+                                         <td>Total:</td>
+                                         <td class="totalamount subTotalRightTxt" align="right">${{orderData.total_amount | number : 2}}</td>
+                                      </tr>
+                                   </table>
+                                </div>
+                             </td>
+                          </tr>
+                       </tbody>
+                    </table>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,47 @@
+<div id="{{page.tabslug}}" ng-controller = "ContactController as contact" class="contact psection">
+	
+                <div class="_960px" ng-if="!multipleAddress">
+                   <div id  ="viewmap" style="height:350px"></div>
+                    
+                    <div class="text-align-center panel_contactsection">
+                        <div class="callout_contact">
+                            <p class="sectiontitle">contact</p>
+                            <p class="txt_address">
+                                <strong>{{currentRestaurant.address}}</strong>
+                            </p>
+                            <a href="javascript:void(0)" ng-show = "currentRestaurant.has_reservation" data-popup="reserve_a_table" class="ubtn btn_contactreserve y-reserveTable" ng-click="reservetable()">reserve a table</a>
+                           
+                            <p class="txt_contactdetail">
+                                <strong>phone</strong>
+                                <a href="tel:{{formattedPhoneNo(currentRestaurant.phone_no)}}">{{formattedPhoneNo(currentRestaurant.phone_no)}}</a>
+                            </p>
+
+                            <p class="txt_contactdetail">
+                                <strong>delivery area</strong>
+                                {{currentRestaurant.delivery_desc}}
+<!--                                South 12th St. to North 53rd St. & FDR to West 11th Ave.-->
+                            </p>
+
+                            <div class="txt_contactdetail y-resCalender">
+                                <strong>hours</strong>
+                                Open 24 hours! All year around!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_960px" ng-if="multipleAddress">
+                    <div id="viewmap" style="height:550px"></div>                   
+                    <div class="_960px landing_listpanel">
+                            <div class="col-md-4 col-sm-4" ng-repeat="resAddress in restaurantAddress">
+                                <div class="text-align-center landing_list_contact">
+                                    <p class="contact_resname" ng-bind-html="resAddress.name"></p>
+                                    <p class="contact_resaddress">{{resAddress.address}}</p>
+                                    <p class="contact_resphoneno">{{resAddress.phone}}</p>
+                                    <a href="{{resAddress.reservationurl}}" target="_blank" ng-show = "currentRestaurant.has_reservation" class="ubtn blackbtn _mb15" ng-click="action('r',restaurant.id)" target="_blank">reserve a table</a><br>
+                                    <a href="javascript:void(0)" class="ubtn" ng-click="chainRestaurantOrder(resAddress.name,resAddress.id)" target="_blank">order online</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+           
+</div>

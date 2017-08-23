@@ -1,0 +1,261 @@
+<div layout="column" flex ng-controller = "BaseController as base">
+	<ng-include src="getPartial('frontend', 'header.html')" ng-if="!isHeaderHidden()"></ng-include>    
+	<div layout="row" flex>
+		<md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" 
+    		layout="column" class=" md-sidenav-left db-sidenav main-sidenav md-whiteframe-3dp"
+    		ng-if="isSideNavVisible()">
+    		<md-toolbar class="md-tall md-hue-2">
+			    <span flex hide-gt-md>
+			        <md-button class="md-icon-button pull-right clr-right" md-ink-ripple ng-click="closeSideNavPanel()" hide-gt-sm>
+			            <md-icon class="material-icons gray">clear</md-icon>
+			        </md-button>
+			    </span>
+			    <div layout="column" class="md-toolbar-tools-bottom inset">
+			        <user-avatar class="text-center" ng-click="logoClickHandler()">
+			        	<img ng-src="{{user.companyLogo}}" alt="" />
+			        </user-avatar>
+			        <span flex></span>
+			        <md-list ng-show="user.accessToken">
+			            <md-list-item class="no-padding">
+			                <img ng-src="{{user.profilePic}}" ng-click="viewOwnProfile()" class="md-avatar" alt=""/>
+			                <div class="md-list-item-text md-line-2 txt-size-fix" layout="column" title="{{user.fullname}}">
+			                    {{user.fullname}}
+			                    <span class="gray" ng-hide="$index == 0" 
+			                    	ng-repeat="item in user.displayDetail track by $index">{{item}}</span>
+			                </div>
+			            </md-list-item>
+			        </md-list>
+			    </div>
+			</md-toolbar>
+			<md-content flex class="no-bg">
+		    	<ng-include src="getPartial('frontend', 'side-nav.html')"></ng-include>
+		    </md-content>
+		</md-sidenav>
+
+		<div layout="column" class="no-bg content-wrapper" flex id="content" 
+			style="overflow: visible !important; " ng-if="section.archiveProfile">
+			<ng-include src="getPartial('frontend', 'dashboard/account-settings/general/archive.html')" ng-controller="ArchiveController" layout="column"></ng-include>
+			<!-- <div ng-include src="getPartial('frontend', 'dashboard/account-settings/general/archive.html'"></div> -->
+		</div>
+		<!-- ng-scrollbars ng-scrollbars-config="config" -->
+		<md-content layout="column" class="no-bg content-wrapper" flex 
+			ng-hide="section.archiveProfile">
+			<!-- Start Idle Modal Section -->
+			<script type="text/ng-template" id="warning-dialog.html">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-body">
+					    <div idle-countdown="countdown" ng-init="countdown=5">
+					        <div layout="row" layout-align="center center">
+					           <h3 class="no-margin">You're Idle. Do Something!</h3>
+					        </div>
+					        <div class="clearfix"></div>
+					        <div class="clearfix"></div>
+					        <div layout="column" layout-align="center center" class="md-subhead">
+					            <div>You'll be logged out in 
+					            	<span class="b md-headline">{{countdown}}</span> second(s).</div>
+					            <!-- <div>
+					                <span class="b md-headline">{{countdown}}</span> second(s)
+					            </div> -->
+					        </div>
+					    </div>
+					</div>  
+				</div> 
+			</script>
+			<!-- End Idle Modal Section -->
+
+			<!-- Start Common Section -->
+			<!-- <ng-include src="getPartial('common', 'header.html')" 
+				ng-hide="callback == 'candidatePortal' || section.templateBuilder || section.segmentField"></ng-include> -->
+
+			<ng-include src="getPartial('common', 'form-builder/home.html')"
+				ng-if="section.formBuilder" ng-controller="FormBuilderController"></ng-include>
+
+			<ng-include src="getPartial('common', 'template-builder/home.html')"
+				ng-if="section.templateBuilder" ng-controller="TemplateBuilderController as demo"></ng-include>
+
+			<ng-include src="getPartial('common', 'template-consumer/home.html')"
+				ng-if="section.templateConsumer" ng-controller="TemplateConsumerController"></ng-include>
+		        
+		    <ng-include src="getPartial('common', 'communication/communicationNotification.html')" 
+		        ng-if="section.communication" ng-controller="SetupController"></ng-include>
+
+		    <div ng-if="section.userRelevance" ng-controller="SetupController">
+		        <ng-include src="getPartial('common', 'relevance/home.html')" 
+				 	ng-controller="RelevanceController as ctrl"></ng-include>
+		    </div>    
+			<!-- End Common Section -->
+
+			<!-- Start Frontend Section -->
+			<ng-include style="height:100%"  src="getPartial('frontend', 'user/login/home.html')"
+				ng-if="(!user.accessToken || section.login) && !section.changePassword" ng-controller="UserController">
+			</ng-include>
+
+			<ng-include style="height:100%" src="getPartial('frontend', 'user/login/change-password.html')"
+				ng-if="section.changePassword" ng-controller="UserController"></ng-include>
+
+			<!-- ng-controller="DashboardController as ctrl" -->
+			<ng-include src="getPartial('frontend', 'home.html')"
+				ng-if="(section.layout.frontend || section.layout.dashboard) && user.accessToken" class="animated fadeIn"
+				ng-controller="AllFilterController as fctrl"></ng-include>
+
+			<ng-include src="getPartial('frontend', 'condidatePortal/home.html')"
+				ng-if="section.candidatePortal" ng-controller="CandidatePortalController"></ng-include>	
+		                    
+		    <ng-include src="getPartial('frontend', 'payroll/statutory-compliances/report/
+		    setting.html')"
+		        ng-if="section.registersReport" ng-controller="PayrollRegisterReportController as ctrl"></ng-include>
+		        
+		    <ng-include src="getPartial('frontend', 'payroll/statutory-compliances/fillings/add-pf-challan.html')"
+		        ng-if="section.pfChallan" ng-controller="PayrollFilingsController as ctrl"></ng-include>
+		           
+		    <ng-include src="getPartial('frontend', 'provisionManager/request-view/allotment.html')" 
+				ng-if="section.provisionAllotment" ng-controller="ProvisionManagerController as ctrl"></ng-include>
+
+			<ng-include src="getPartial('frontend', 'provisionManager/request-view/revoke.html')" 
+				ng-if="section.provisionRevoke" ng-controller="ProvisionManagerController as ctrl"></ng-include>
+
+			<ng-include src="getPartial('frontend', 'dashboard/compensation/my-pay/loans/details.html')" 
+				ng-if="section.loanDetails" ng-controller="LoanController as ctrl"></ng-include>
+
+			<ng-include src="getPartial('frontend', 'payroll/employee-related-tasks/loans/add-request.html')" 
+				ng-if="section.loanAdvanceDetails" ng-controller="LoanAdvanceController as ctrl"></ng-include>
+
+			<ng-include src="getPartial('frontend', 'payroll/employee-related-tasks/loans/loan-details.html')" 
+				ng-if="section.viewLoanDetails" ng-controller="LoanAdvanceController as ctrl"></ng-include>			
+
+            <div ng-if="section.frontend.newHireManagement.verify">
+                <ng-include src="getPartial('frontend', 'newHireManagement/onboarding-status/verify-screen.html')" ng-controller="OnBoardingStatusController as ctrl"></ng-include>
+            </div>            
+
+
+            <md-content flex class="md-padding no-bg bgimg" 
+            	ng-if="user.accessToken && section.resetPassword">
+			    <div class="qc2">
+			        <div class="account-bx-cnt">
+			            <div class="account-bx">
+			            	<div>
+				                <h5 class="md-subhead b">Change Password</h5>
+				                <div layout="row" layout-align="start center" class="rows">
+				                    <span>Choose a unique password to protect your account</span>
+				                    <div flex></div>
+				                    <!-- <span class="gray" ng-show="user.lastChangePassword">
+				                        Last Changed -  {{user.lastChangePassword}}</span>
+				                    <div flex="5"></div> -->
+				                </div>
+				            </div>
+			                <ng-include src="getPartial('frontend', 'dashboard/account-settings/security/change-password/home.html')" ng-controller="AccountSettingsController"></ng-include>
+			            </div>
+			        </div>
+			    </div>
+			</md-content>
+			<!-- End Frontend Section -->
+
+
+			<!-- Start Setup Section -->
+			<ng-include src="getPartial('setup', 'travelExpense/travel/travelPolicies/settings/home.html')" 
+		        ng-if="section.travelPolicySetting" ng-controller="SetupController as ctrl"></ng-include>
+
+			<ng-include src="getPartial('setup', 'home.html')" 
+				ng-if="user.accessToken && section.layout.setup" ng-controller="SetupController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'organization/role/permissions.html')"
+				ng-if="section.permissions" ng-controller="PermisssionController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'organization/user-management/groups/element/home.html')"
+				ng-if="section.groupElement" ng-controller="ElementController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'organization/user-management/profilefields/add-profile-field.html')" ng-if="section.segmentField" ng-controller="SetupController"></ng-include>
+			
+			<ng-include src="getPartial('setup', 'workflow/approver/add-edit.html')" 
+				ng-if="section.requestflow" ng-controller="WorkflowController as ctrl"></ng-include>
+
+			<ng-include src="getPartial('setup', 'lms/setting.html')" 
+				ng-if="section.setting" ng-controller="SetupController"></ng-include>	
+			
+			<ng-include src="getPartial('setup', 'timeAttendance/timePlan/planSetting.html')" 
+				ng-if="section.taPlanSetting" ng-controller="TAController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/setting.html')" 
+				ng-if="section.shift" ng-controller="TAController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/reportingMethod/addReportingMethod.html')" 
+				ng-if="section.addReportingMethod" ng-controller="TAController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/relevance.html')" 
+				ng-if="section.relevance" ng-controller="TAController"></ng-include>
+
+		    <div ng-if="section.wfh" ng-controller="SetupController">
+				<ng-include src="getPartial('setup', 'timeAttendance/wfh.html')" 
+		            ng-controller="PoliciesController"></ng-include>
+		    </div>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/lateAttendance.html')" 
+				ng-if="section.lateAttendance" ng-controller="PoliciesController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/minWork.html')" 
+				ng-if="section.minWork" ng-controller="PoliciesController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/earlyGoing.html')" 
+				ng-if="section.earlyGo" ng-controller="PoliciesController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/absent.html')" 
+				ng-if="section.absent" ng-controller="PoliciesController"></ng-include>
+
+		    <div ng-if="section.compOff" ng-controller="SetupController">
+				<ng-include src="getPartial('setup', 'timeAttendance/compOff.html')" 
+				ng-if="section.compOff" ng-controller="PoliciesController"></ng-include>
+		    </div>
+		    
+		    <div ng-if="section.overTime" ng-controller="SetupController">
+				<ng-include src="getPartial('setup', 'timeAttendance/overtime.html')" 
+		            ng-if="section.overTime" ng-controller="PoliciesController"></ng-include>
+		    </div>
+
+		    <div ng-if="section.regularizationSetting" ng-controller="SetupController">
+				<ng-include src="getPartial('setup', 'timeAttendance/onDuty.html')" 
+				ng-controller="RegularizationController"></ng-include>
+		    </div>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/missed.html')" 
+				ng-if="section.missed" ng-controller="RegularizationController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'timeAttendance/forgot.html')" 
+				ng-if="section.forgot" ng-controller="RegularizationController"></ng-include>
+			
+			<ng-include src="getPartial('setup', 'prejoin/new-hire-plans/settings/addsettings.html')" 
+		        ng-if="section.prejoinSetting" ng-controller="SetupController as ctrl"></ng-include>
+			
+			<ng-include src="getPartial('setup', 'provision/provisionSetting.html')" 
+				ng-if="section.provisionSetting" ng-controller="SetupController"></ng-include>
+
+			<ng-include src="getPartial('setup', 'onboarding/onboarding-plans.html')" 
+				ng-if="section.onboardingPlans" ng-controller="OnboardingController as ctrl"></ng-include>
+				
+			<ng-include src="getPartial('setup', 'onboarding/onboarding-plans.html')" 
+				ng-if="section.onboardingPlans" ng-controller="OnboardingController as ctrl"></ng-include>
+			
+			<div ng-if="section.clearanceRelevance" ng-controller="SetupController">
+		        <ng-include src="getPartial('common', 'relevance/home.html')" 
+					ng-controller="RelevanceController as ctrl"></ng-include>
+		    </div>
+		        
+		    <ng-include src="getPartial('setup', 'helpdesk/ticketSetting/ticketSetting.html')" 
+				ng-if="section.ticketSettings" ng-controller="HelpDeskController as ctrl"></ng-include>
+		    
+		    <div ng-if="section.planSetting" ng-controller="SetupController">
+		        <ng-include src="getPartial('setup', 'payroll/compensationPlans/setting.html')"
+		            ng-controller="CompensationPlanController as ctrl"></ng-include>
+		    </div>
+		        
+		   	<div ng-if="section.holidayRelevance" ng-controller="SetupController">
+		        <ng-include src="getPartial('common', 'relevance/home.html')" 
+					ng-controller="RelevanceController as ctrl"></ng-include>
+		    </div>
+		        <div ng-if="section.ticketRating">
+		            <ng-include src="getPartial('frontend', 'dashboard/helpdesk/employeeFront/rating.html')"         
+		            ng-controller="FrontEndHelpDeskController as ctrl"></ng-include>
+		        </div>
+		    <!-- End Setup Section -->
+		</md-content>
+	</div>
+</div>

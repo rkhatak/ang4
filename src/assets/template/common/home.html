@@ -1,0 +1,15 @@
+<div ng-controller = "HomeController as home" ng-class="{videoavailable : home.video}" id="{{page.tabslug}}">
+<iframe ng-if="home.video" src="{{home.video}}" width="100%" class="homepagevideo wow fadeIn hide-tablet" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<img ng-if="!home.video" src="{{home.homebg}}" width="100%"/>
+<div class="home text-align-center" style="background-image:url({{getPartial('themes', 'images/bg_homepage.jpg')}})">
+   <div class="txt_homepage">
+      <p class="videotitle_homepage" ng-bind-html="home.title || unsafe"></p>
+      <a ng-if="home.video" href="javascript:void(0)" class="ubtn whitebtn" video-url="{{home.video}}" ng-click="loadVideo()">watch video</a>
+      
+      <div class="homedownarrow pagejump" data-target="{{home.nextpage}}" ng-click="nevigateMenu(home.nextpage)">
+         <i class="i_downstyle"></i>
+         <i class="i_downarrow fadeInUp aanimated"></i>
+      </div>
+   </div>
+</div>
+</div>

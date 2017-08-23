@@ -1,0 +1,19 @@
+  <div class="box_expectedtime _fs14">
+  <p class="_fontarial">Expected Time of <span class="text-capitalize">{{order_type}}</span>:</p>
+
+        <div ng-if='timeEdit'>
+        <p class="txt_upper">{{dateText(date)}}, {{hourTime(time)}}</p>
+        <p class="txt_minhours">Hours: <span class="t-operation-hours"></span></p>
+        <a href="javascript:void(0)" class="txtlink t-changeTime" ng-click="changeTime()">Change</a>       
+        </div>
+        <div ng-if='!timeEdit' class="panel_selectexpectedtime">
+              <select class="t-order-date" ng-model="selectedDate" ng-change="dayChange(selectedDate)">       
+                 <option ng-repeat="date in dates" ng-selected="{{selectedOption(date['value'],selectedDate)}}" value="{{date['value']}}">{{date['text']}}</option>
+              </select>
+              <select class="t-order-time" ng-change="saveDateTime(selectedSize)" ng-model="selectedSize"></select>
+        </div>     
+       <!--  <p><a href="javascript:;" class="txtlink t-saveDateTime">Submit</a></p> -->
+   <div ng-if='tooltipselecttime' class="tooltip lightbox tooltipselecttime">
+        <p class="txt">You need to select a date and time from the restaurant’s available slots to proceed with your order.<a href="javascript:void(0)" class="i_close btn_close" ng-click="hideToolTip()">+</a></p>
+    </div>
+  </div>

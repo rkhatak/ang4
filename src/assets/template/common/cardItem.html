@@ -1,0 +1,54 @@
+    <div class="_p30">
+      <div class="a_scroll_head">
+               <p class="title_popupitem item_title">{{cart.item_name}}</p>
+               <p class="txt_popupitemdes item_desc">{{cart.item_desc}}</p>
+               <p class="txt_popupitemprice item_price">${{cart.prices[0].value}}</p>
+               </div>
+               <div class="a_scroll a_area">  
+               
+                 <img ng-show="cart.item_image_url!=''" src="{{cart.imagePath+cart.item_image_url}}" alt="{{cart.item_name}}" class="img-responsive">
+                 <div ng-if="addonsDisplay" class="addons">
+                     <div ng-include="getPartial('common', 'addons.html')"></div>
+                 </div>
+               <div class="txt_popupinstructions">
+                  <p>Special Instructions</p>
+                  <em>E.g. extra cheese, sauce on the side etc. Any additional charges will be directly charged to your credit card.
+                  <span>And remember to inform the restaurant of all dietary restrictions and food allergies in the box below.</span></em>
+               </div>               
+                <textarea class="menu_special_instruction_item special_instruction" placeholder="SPECIAL INSTRUCTIONS" maxlength="255" rows="4" ng-model="special_instruction">{{ special_instruction }}</textarea>
+                <p class="txt_word_count">&nbsp;{{255 - special_instruction.length}} left</p>
+                </div>
+               <div class="row addonpopup_footer">
+                <input type="hidden" id="uid" value="{{cart.uid}}">
+                <input type="hidden" id="item_id" value="{{cart.item_id}}">
+                <input type="hidden" id="price_id" value="{{cart.prices[0].id}}">
+                <input type="hidden" id="item_price" value="{{cart.prices[0].value}}">
+                <input type="hidden" id="quantity" value="{{cart.quantity}}">
+                <input type="hidden" id="item_name" value="{{cart.item_name}}">
+                <input type="hidden" id="item_desc" value="{{cart.item_desc}}">
+                <input type="hidden" id="item_image_url" value="{{cart.item_image_url}}">
+                  <div class="col-md-3 col-xs-6 col-sm-3">
+                     <b>Quantity</b>
+                     <div class="slider_quantity">
+                        <a href="javascript:void(0);" class="ubtn btn_addtocard decrease subtract-multiplier" ng-model="cart.quantity" ng-click="subMulti()"></a>
+                        <span class="multiplier">{{cart.quantity}}</span>            
+                        <a href="javascript:void(0);" class="ubtn btn_addtocard add-multiplier" ng-model="cart.quantity" ng-click="addMulti()"></a>
+                     </div>
+                  </div>
+                  <div class="col-md-2 col-xs-3  col-sm-2">
+                     {{sub_total =  cart.sub_total ?cart.sub_total:cart.prices[0].value; ""}} 
+                    
+                     <p><b>Price</b><strong>$<span class="sub-total">{{sub_total| number : 2}}</span></strong>
+                     </p>
+                  </div>
+                  <div class="col-md-2 col-xs-3 _mr0-xs  col-sm-2">
+                   
+                    {{ total = sub_total * cart.quantity;""}}
+                    {{ total =(100*total/100)| number:0;""}}
+                    <p class="txt_total color-red"><b>TOTAL</b><strong>$<span class="total">{{total | number : 2}}</span></strong></p>
+                  </div>
+                  <div class="col-md-5 col-xs-12  col-sm-5 text-align-md-right text-align-ip-right text-align-xs-center">
+                     <a href="javascript:void(0);" class="ubtn blackbtn btn_popupaddtoorder add-to-order" ng-click="addToCart()">ADD TO ORDER</a>
+                  </div>
+               </div>
+            </div> 

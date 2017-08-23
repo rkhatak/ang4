@@ -1,0 +1,34 @@
+    <div class="row txt_bs_item item_{{cartitem.uid}}">
+    <div class="col-md-8 col-xs-8" title="{{cartitem.item_name}}">
+    <span class="truncate-text">{{cartitem.item_name}}</span>
+    </div>
+    <strong class="col-md-1 col-xs-1 column">{{cartitem.quantity}}</strong>
+    <p class="col-md-3 col-xs-3 column text-align-right">${{cartitem.item_price *  cartitem.quantity | number : 2}}</p>
+    </div>
+   
+    <div ng-if="cartitem.addons.length > 0" class="t-addons-summary">
+            <div ng-repeat="addon in cartitem.addons" class="row addons-txt txt_bs_item">
+                <span class="col-md-8 col-xs-8 column truncate-text">+ {{addon['optionName']}}</span>
+                <span class="col-md-1 col-xs-1 column review">{{cartitem.quantity}}</span>
+                <span ng-if="addon['isFree']" class="col-md-3 col-xs-3 column">${{0 | number : 2}}</span>
+                <span ng-if="!addon['isFree']" class="col-md-3 col-xs-3 column text-align-right">${{addon['optionPrice'] *  cartitem.quantity | number : 2}}</span>
+                
+            </div>
+            
+    </div>
+    <div ng-if="cartitem.addons.length > 0" class="t-item-total item-total-txt text-align-right _fs12 _fontarial">${{cartitem.total_item_price | number : 2}}</div>
+    
+    <p class="t-item-instructions _fs10 _fontarial">{{cartitem.special_instruction}}</p>  
+    <div class="link_edit clearfix position-relative">
+    <a ng-click="editOrder($event)" href="javascript:void(0);" class="t-edit-order edit_{{cartitem.uid}} ubtn" data-id="{{cartitem.uid}}" data-toggle="tooltip" title="Edit Dish">
+      <i class="i_pencil"></i>
+    </a>
+    <a ng-click="deleteOrder($event)" href="javascript:void(0);" class="t-delete-order ubtn" data-id="{{cartitem.uid}}" data-name="{{cartitem.item_name}}" data-toggle="tooltip" title="Remove Dish">
+      <i class="i_wrong">+</i>
+    </a>
+    <div class="tooltip t-tooltip_{{cartitem.uid}} hide">
+      <div class="txt">
+        <p>Are you sure you want to <br>remove <strong>'<span class="itemName_{{cartitem.uid}}">{{cartitem.item_name}}</span>'</strong> from your order?</p>
+        <span ng-click="confirmDeleteOrder($event)" class="ubtn blackbtn t-confirm-delete-order" data-id="{{cartitem.uid}}">YES, DELETE IT</span><span ng-click="cancelDeleteOrder($event)" class="ubtn blackbtn t-cancel-delete-order" data-id="{{cartitem.uid}}">CANCEL</span>
+      </div>
+    </div>

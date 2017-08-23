@@ -1,0 +1,232 @@
+<div ng-if="checkoutSavedAddress && checkoutAddress" class="y_saved_delivery_address">
+    <div ng-repeat="savedAddress in savedAddressArray" ng-include="getPartial('common', 'checkoutSavedAddress.html')"></div>
+</div>
+
+   <div>
+      <p class="title_checkout">Enter your contact details below</p>
+      <div class="form_checkoutsubsection">
+         <em class="txt_mandatorymessage"><span class="color_red">*</span> Mandatory Fields</em>
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">Name<span class="error-color">*</span></div>
+            <div class="col-md-7 inputtwo">
+               <input ng-blur="validateFirstName()" ng-keyup="nameFormat($event)" placeholder="First Name" name="first_name" value="formData.name" type="text" ng-model="formData.name"><input placeholder="Last Name" name="last_name" value="{{(formData.name!='')?formData.lastName:currentUser.last_name}}" class="capitalize" type="text" ng-model="formData.lastName">
+               <p class="error-message hide">Sorry, We don't talk to strangers</p>
+            </div>
+         </div>
+         <div ng-if="checkoutAddress" class="y_checkout_delivery_address">
+              <div ng-include="getPartial('common', 'checkoutDeliveryAddress.html')"></div>
+         </div>
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">phone<span class="error-color">*</span></div>
+            <div class="col-md-7">
+               <div class="phoneno_code"><input ng-blur="validatePhone($event)" ng-keyup="phoneNumberFormat($event)" name="phone_no" maxLength="10" type="text" value="{{(formData.phone!='')?formData.phone:currentUser.phone}}" pattern="[0-9]" ng-model="formData.phone"></div>
+               <em class="_fs10 txt_checkout_notification">We only call in case of food emergencies (i.e. Order and reservation changes, clarifications or cancellations)</em>
+               <p class="error-message error-phoneNo hide">We promise; No prank calls</p>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">email<span class="error-color">*</span></div>
+            <div class="col-md-7">
+               <input ng-blur="validateEmail($event)" name="email" type="text" value="{{(formData.email!='')?formData.email:currentUser.email}}" ng-model="formData.email">
+               <p class="error-message hide">Hey, you forgot something</p>
+            </div>
+         </div>
+         <div class="row panel_instructions">
+            <div class="col-md-5">&nbsp;</div>
+            <div class="col-md-7">
+              <div class="panel_specialinstructions">
+               <strong>Add special instructions for your order (optional)</strong>
+               <br>
+               <div ng-if="deliveryIns"> 
+               <label class="inputfield custom_checkbox">
+               <input name="instructions[]" type="checkbox" value="Please call before you deliver">
+               <span class="control_indicator"></span>
+               Please call before you deliver
+               </label>
+               <label class="inputfield custom_checkbox">
+               <input name="instructions[]" type="checkbox" value="Please leave with the doorman">
+              <span class="control_indicator"></span>
+               Please leave with the doorman
+               </label>
+               <label class="inputfield custom_checkbox">
+               <input name="instructions[]"  type="checkbox" value="Please do not send any napkins or plasticware">
+              <span class="control_indicator"></span>
+               Please do not send any napkins or plasticware
+               </label>
+               </div>    
+               <div ng-if="takeoutIns">
+               <label class="inputfield custom_checkbox">
+               <input name="instructions[]" type="checkbox" value="Please call when the order is ready">
+               <span class="control_indicator"></span>
+               Please call when the order is ready
+               </label>
+               <label class="inputfield custom_checkbox">
+               <input name="instructions[]"  type="checkbox" value="Please do not pack any napkins or plasticware">
+                <span class="control_indicator"></span>
+               Please do not pack any napkins or plasticware
+               </label>
+               </div>    
+               
+               <textarea name="own_instruction" class="own_instruction special_instruction" maxlength="255" placeholder="Enter your own" autocomplete="off" rows="4" ng-model="formData.specialIns">{{formData.specialIns}}</textarea>
+               <p class="txt_word_count" style="visibility: hidden;">&nbsp;</p>
+               
+              </div>
+            </div>
+         </div>
+         </div>
+         <div class="">
+         <p class="title_checkout">Enter payment details</p>
+         <div class=" _fontarial _fs14">
+             <div ng-if="is_logged_in">
+                 <div ng-if="currentRestaurant['order_pass_through']===1">
+                     <p class="txt_orders_with  _fontarial _fs14">This restaurant does not accept points for payments towards online orders. Please pay the full amount by card.</p>
+                 </div>
+                 <div ng-if="currentRestaurant['order_pass_through']!==1">
+                     <div ng-if="currentUser.points < minRedemption">
+                       <p class="txt_orders_with _fontarial _fs14">You can now pay for orders with your Dine & More points. You&#8217;ll need a minimum of {{minRedemption}} points (<strong>you&#8217;re currently at {{currentUser.points}}</strong>) to start redeeming them towards online orders.</p>  
+                     </div>
+                     <div ng-if="currentUser.points >= minRedemption">
+                       <p class="_mb15">You can now use your points towards your order and pay any remaining balance with a credit card. </p>
+                            <div class="row panel_radiobtn">
+                                <label class="col-md-6 custom_radio">
+                                        <input name="pay-type" type="radio" ng-checked="true" value="Card" class="y-pay-type" ng-click="changePaymentType($event)">
+                                        <span class="control_indicator"></span>
+                                        <span>Pay in Full by Card</span>
+                                </label>
+                                <label class="col-md-6 custom_radio">
+                                       <input name="pay-type" type="radio" value="Mix" class="y-pay-type" ng-click="changePaymentType($event)">
+                                       <span class="control_indicator"></span>
+                                        <span>Pay with Points</span>
+                                </label>                                        
+                            </div>
+                     </div>
+                 </div>
+                <p class="txt_points_redeemed y_point_detail hide"><em>Points Redeemed:</em> <span class="pointsRedeemed r">{{currentUser.points}}</span> <span class="pipe">|</span><em>Cash Earned: </em>$<span class="cashEarned r">7.50</span><span class="pipe">|</span><em>Points Balance:</em> <span class="pointsBalance r">0</span></p>
+                <p class="rs y_txt_pay text-align-center _pt10 _mb15">
+                    <span class="y_remaining_card_balace hide">Pay balance $<span class="remain">24.95</span> by credit card using secure SSL encrypted payment technology</span>
+                    <span class="y_card_pay">We use secure SSL encrypted payment technology.</span>
+                    <i class="i_encryptlockicon"></i>
+                </p>
+                <p class="txt_pay y_full_point_pay hide">You&#8217;ve successfully redeemed <strong class="pointsRedeemed">{{currentUser.points}}</strong> points towards your order total and there is no leftover balance to pay :) </p>
+               </div>
+            </div>       
+         <div class="form_checkoutsubsection y_payment_detail">
+            <div class="row">
+               <p class="col-md-5 text-align-md-right txt_checkoutlabel">Name on Card <span class="error-color astrickCheckout">*</span></p>
+               <div class="col-md-7">
+                  <input ng-blur="validateCardName($event)" name="card_name" class="capitalize" autocomplete="off" type="text" ng-model="formData.cardname" value="{{formData.cardname}}">
+                  <em class="_fs10 txt_checkout_notification">As it appears on your credit card</em>
+                  <p class="error-message new-card-msg hide">And whose card is this?</p>
+                  <ul class="credit_cards unstyled">
+                     <li class="visa" data-type="visa"></li>
+                     <li class="master_card" data-type="master"></li>
+                     <li class="amex" data-type="amex"></li>
+                     <li class="ddiscover" data-type="disc"></li>
+                     <li class="diners" data-type="dinn"></li>
+                     <li class="jcb" data-type="jcb"></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="row">
+               <p class="col-md-5 text-align-md-right txt_checkoutlabel">Card Number <span class="error-color astrickCheckout">*</span></p>
+               <div class="col-md-7">
+                  <input ng-blur="validateCardNumber($event)" ng-keyup="detectCardType($event)" name="card_number" type="text" maxLength="19" ng-model="formData.cardNo" value="{{formData.cardNo}}">
+                  <em class="_fs10 txt_checkout_notification">Up to 16 digits on the front of your card. No spaces or dashes</em>
+                  <p class="error-message new-card-msg hide">Try rubbing your fingers over the numbers, that helps us get 'em right</p>
+               </div>
+            </div>
+            <div class="row">
+               <p class="col-md-5 text-align-md-right txt_checkoutlabel">Expiry Date <span class="error-color astrickCheckout">*</span></p>
+               <div class="col-md-7 expiry_date_custom">
+                  <div class="select_expiry inputtwo clearfix">                                    
+                        <select class="card_expire_month">
+                           <option ng-repeat="month in months" value="{{month}}" ng-selected="{{(currentMonth==month)?true:false}}">{{month}}</option>
+                        </select>
+                      <select class="card_expire_year">
+                           <option ng-repeat="year in years" value="{{year}}" ng-selected="{{(currentYear==year)?true:false}}">{{year}}</option>
+                        </select>
+                                                       
+                  </div>
+                  <em class="_fs10 txt_checkout_notification">Find this on the front of your card</em>
+                  <p class="error-message new-card-msg card-validity hide">Please select valid expiry date(MM-YYYY).</p>
+               </div>
+            </div>
+            <div class="row position_relative">
+               <p class="col-md-5 text-align-md-right txt_checkoutlabel">CVV Code <span class="error-color astrickCheckout">*</span></p>
+               <div class="col-md-7">
+                  <input ng-blur="validateCVVCode($event)" ng-keyup="onlyNumber($event)" class="creditcard-cvv" name="cvv_code" type="password" maxlength="4" ng-model="formData.cvv" value="{{formData.cvv}}">
+                  <div class="link_cvvpanel">
+                    <a href="javascript:void(0)" class="link_cvvmessage" ng-click="whatsThisShow()">What's this?</a>
+                    <div ng-show="varWhatsThisShow" class="cvvmessagebox">
+                       <div class="box_cvvnumber rs">
+                          <p class="txt_cvvnumber fleft">What is CVV Number?</p>
+                          <a href="javascript:void(0)" class="i_close btn_close" ng-click="whatsThisHide()">+</a>
+                       </div>
+                       <div class="cvvcontent row">
+                          <div class="col-md-5"><img src="assets/images/card_verification_img1.jpg" class="img-responsive"></div>
+                          <div class="col-md-7">
+                             <div class="txtcvvcontent">
+                                <strong>For Visa/Master/Diners Card Holders</strong>
+                                <p>For your safety and security, we require that you enter your cards verification
+                                   number. The verification number is a 3-digit number printed on the back of your
+                                   card. It appears after and to the right of your card number.
+                                </p>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="cvvcontent row">
+                          <div class="col-md-5"><img src="assets/images/card_verification_img2.jpg" class="img-responsive"></div>
+                          <div class="col-md-7">
+                             <div class="txtcvvcontent">
+                                <strong>For American Express Card Holders</strong>
+                                <p>For your safety and security, we require that you enter your cards verification
+                                   number. The American Express verification number is a small 4-digit number
+                                   printed on the front of your card on the right hand side.
+                                </p>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="cvvcontent row">
+                          <div class="col-md-5"><img src="assets/images/card_verification_img3.jpg" class="img-responsive"></div>
+                          <div class="col-md-7">
+                             <div class="txtcvvcontent">
+                                <strong>For JCB Card Holders</strong>
+                                <p>For your safety and security, we require that you enter your cards verification
+                                   number. The JCB verification number is a small 4-digit number printed on the
+                                   front of your card on the left hand side.
+                                </p>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="whitedownarrowa"></div>
+                    </div>
+                  </div>
+                  <em class="_fs10 txt_checkout_notification">3 or 4 digits on the back of most cards. On the front of AMEX cards</em>
+                  <p class="error-message new-card-msg hide">It would be irresponsible of us not to require this.</p>
+               </div>
+            </div>
+            <div class="row row-checkout-billingzip">
+               <p class="col-md-5 text-align-md-right txt_checkoutlabel">Billing Zip <span class="error-color astrickCheckout">*</span></p>
+               <div class="col-md-7 column">
+                  <input ng-keyup="onlyNumber($event)" ng-blur="validateZipCode($event)" class="checkout-billingzip" name="zip" type="text" maxlength="10" pattern="[0-9]*" ng-model="formData.pin" value="{{formData.pin}}">
+                  <p class="error-message new-card-msg hide">Come on, you gave us all the other info. Why you holding out?</p>
+               </div>
+            </div>            
+         </div> 
+            <div>
+                <div class="row hide">
+                   <p class="col-md-5 column">&nbsp;</p>
+                   <div class="col-md-7">
+                      <p class="error-message stripe-error">
+                   </div>
+                </div>
+                <div class="row">
+                   <p class="col-md-5 column hidden-sm hidden-xs">&nbsp;</p>
+                   <div class="col-md-7 text-align-center">
+                     <a href="javascript:void(0);" class="ubtn blackbtn placemyorder" ng-click="placeOrder($event)">place my order</a>
+                      <span class="lineloader confirm_loader hide">  <span></span><span></span><span></span></span>
+                   </div>
+                </div>
+             </div>
+          </div>
+   </div>

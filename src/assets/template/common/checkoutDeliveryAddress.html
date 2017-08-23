@@ -1,0 +1,31 @@
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">address 1<span class="error-color">*</span></div>
+            <div class="col-md-7">
+               <input ng-blur="validateAddress1($event)" name="address_1" type="text" value="{{checkoutAddressData.addressValue}}" ng-disabled="{{(checkoutAddressData.addressValue)?true:false}}" maxlength="100">
+               <em class="_fs10 txt_checkout_notification">Enter only street address. (Don't include building name, suite number or floor number)</em>
+               <p class="error-message hide">Hey, you forgot something</p>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">address 2<span class="error-color"></span></div>
+            <div class="col-md-7">
+               <input name="address_2" type="text" maxlength="100">
+               <em class="_fs10 txt_checkout_notification">Enter only street address. (Don't include building name, suite number or floor number)</em>
+               <p class="error-message hide">Hey, you forgot something</p>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">city<span class="error-color">*</span></div>
+            <div class="col-md-7 inputtwo">
+               <input name="city" type="text" value="{{checkoutAddressData.city}}" disabled>
+               <input name="state_code" type="text" value="{{checkoutAddressData.stateCode}}" disabled>
+               <p class="error-message hide">Hey, you forgot something</p>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-5 text-align-md-right txt_checkoutlabel">zip<span class="error-color">*</span></div>
+            <div class="col-md-7">
+               <input ng-blur="validateShippingZipCode($event)" name="zipcode" type="text" value="{{checkoutAddressData.zipCode}}" ng-disabled="{{(checkoutAddressData.zipCode)?true:false}}" class="zip" pattern="[0-9]*" maxlength="9">
+               <p class="error-message hide">Hey, you forgot something</p>
+            </div>
+         </div>   

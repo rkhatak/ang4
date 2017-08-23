@@ -1,0 +1,67 @@
+[
+    {
+    "id": "60462",
+    "name":"Union Square",
+    "address":"39 East 13th Street (At University PI)",
+    "phone":"212-982-3758",
+    "has_reservation": 1 ,
+    "reservationurl" : "https://widget.reserve.com/1c9ed467-3cea-4aa1-a5f5-8e7864a5c3af/search"
+    },
+    {
+    "id": "59139",
+    "name":"Chelsea",
+    "address":"236 8th Avenue (At W 22nd St.)",
+    "phone":"212-620-4585",
+    "has_reservation": 1,
+    "reservationurl" : "https://widget.reserve.com/191138da-5373-434f-8b87-4591c856d4e5/search"     
+    },
+    {
+    "id": "62792",
+    "name":"Upper East Side",
+    "address":"1479 1st Avenue (At E 77th St.)",
+    "phone":"212-744-6374",
+    "has_reservation": 1,
+    "reservationurl" : "https://widget.reserve.com/388206f9-7b6e-4ab2-88d0-90ff0512603d/search"     
+    },
+    {
+    "id": "61245",
+    "name":"Upper West Side",
+    "address":"435 Amsterdam Avenue (At W 81st St.)",
+    "phone":"212-362-5861",
+    "has_reservation": 1,
+    "reservationurl" : "https://widget.reserve.com/b6d7c3d3-1291-4a8a-a113-cbe387b92753/search"     
+    },
+    {
+    "id": "67266",
+    "name":"Park Slope",
+    "address":"61 A 7th Avenue (Between Lincoln & Berkeley PI)",
+    "phone":"718-622-6353",
+    "has_reservation": 1,
+    "reservationurl" : "https://widget.reserve.com/388206f9-7b6e-4ab2-88d0-90ff0512603d/search"     
+    },
+    {
+    "id": "66985",
+    "name":"Cobble Hill",
+    "address":"193 Smith Street (Between Baltic & Warren St.)",
+    "phone":"718-722-7871",
+    "has_reservation": 1,
+    "reservationurl" : "javascript:void(0)"     
+    },
+    {
+    "id": "67288",
+    "name":"Long Island City",
+    "address":"4745 Vernon Blvd (At 48th Ave.)",
+    "phone":"718-392-7888",
+    "has_reservation": 1,
+    "reservationurl" : "https://widget.reserve.com/388206f9-7b6e-4ab2-88d0-90ff0512603d/search"     
+    },
+    {
+    "id": "62793",
+    "name":"108<sup>th</sup> St.",
+    "address":"975 Amsterdam Avenue (At W 108th St.), New York, 10025",
+    "phone":"212-628-0088",
+    "has_reservation": 1,
+    "reservationurl" : "https://widget.reserve.com/b6d7c3d3-1291-4a8a-a113-cbe387b92753/search"     
+    }    
+]
+

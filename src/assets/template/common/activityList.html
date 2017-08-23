@@ -1,0 +1,27 @@
+<div class="activitytitle mymunchado _p30">
+          <div class="box_activitydate row order_list">
+            <strong class="col-md-6">Activity Archive</strong>
+            <p class="col-md-2 text-align-center">Date</p>
+            <p class="col-md-2 text-align-center">Earned</p>
+            <p class="col-md-2 text-align-right">Redeemed</p>
+          </div>
+   
+        <div class="row order_list" ng-repeat="uPoint in  pointlist">
+                  <p class="col-md-6">{{uPoint.points_descriptions}}</p>
+                  <p class="col-md-2 text-align-center">{{uPoint.readable_created_on}}</p>
+                  <p class="col-md-2 text-align-center">{{uPoint.points}}</p>
+                  <p class="col-md-2 text-align-right">{{uPoint.redeemPoints}}</p>
+         </div>
+          <div ng-if="!pointlist.length" class="row order_list">
+                  <p class="col-md-6">No activity found.</p>
+         </div>  
+             
+              
+          <div class="row order_list">
+            <p class="col-md-6">&nbsp;</p>
+            <strong class="col-md-2 text-align-center _fs14">Points remaining</strong>
+            <strong class="col-md-2 text-align-center">{{totalPoints}}</strong>
+            <strong class="col-md-2 text-align-right"></strong>
+          </div>
+          
+   </div>
