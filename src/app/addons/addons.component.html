@@ -1,0 +1,43 @@
+<div *ngFor="let addon of items1.addons" class="panel_chooseyourtoppings addon-collection" 
+    [attr.data-menu-price-id]="items1.menu_price_id" 
+    [attr.data-selection-type]="addon['selection_type']" 
+    [attr.data-addon-id]="addon['addon_id']" 
+    [attr.data-item-limit]="addon['item_limit']" 
+    [attr.data-enable-price-beyond]="addon['enable_pricing_beyond']">
+    <p class="txt_chooseyourtoppings txt_addonq">
+        <strong>{{addon['name']}}</strong>
+    </p>
+    <p class="addon-error-message error-message hide">Please select an option from below</p>
+    <ul *ngFor="let option of addon['options']" class="unstyled box panel_popupaddon txt_addonradio clearfix">
+       <li class="has-pretty-child">
+          <div class="custom_checkbox">
+            <div class="row">
+              <div class="col-md-10 col-xs-10">
+                <div [ngClass]="{'prettycheckbox' : addon['selection_type'] == 1, 'prettyradio' : addon['selection_type'] != 1}" class="labelright blue" [attr.data-id]="option['id']">
+                  <label for="{{option['id']}}" *ngIf="hasCheckedHtml">
+                      <input [attr.data-priority]="hasCheckedValue(option.inputCheck)" [checked]="option.inputCheck" [name]="getNameFixed(addon['selection_type'],addon['addon_id'])" (click)="addAddonsValue(this)" [type]="addon.inputType" class="t-addonsItems" [attr.data-name]="option['name']" id="{{option['id']}}" value="{{option['price']}}" [attr.data-menu-price-id]="items1.menu_price_id" [attr.data-item-limit]="addon['item_limit']" [attr.data-option-name]="option['name']" [attr.data-addon-id]="addon['addon_id']" [attr.data-option-price]="option['price']" [attr.data-option-id]="option['id']" [attr.data-addon-name]="addon['name']" [attr.data-label]="option['name']" [attr.data-free-addons]="addon['enable_pricing_beyond']">   
+                      <span class="control_indicator"></span>
+                      {{option['name']}}
+                   </label>
+
+                   <label for="{{option['id']}}" *ngIf="!hasCheckedHtml">
+                      <input [checked]="option.inputCheck" [name]="getNameFixed(addon['selection_type'],addon['addon_id'])" (click)="addAddonsValue(this)" [type]="addon.inputType" class="t-addonsItems" [attr.data-name]="option['name']" id="{{option['id']}}" value="{{option['price']}}" [attr.data-menu-price-id]="items1.menu_price_id" [attr.data-item-limit]="addon['item_limit']" [attr.data-option-name]="option['name']" [attr.data-addon-id]="addon['addon_id']" [attr.data-option-price]="option['price']" [attr.data-option-id]="option['id']" [attr.data-addon-name]="addon['name']" [attr.data-label]="option['name']" [attr.data-free-addons]="addon['enable_pricing_beyond']">   
+                      <span class="control_indicator"></span>
+                      {{option['name']}}
+                   </label>
+                </div>      
+              </div>
+                
+                <div class="col-md-2 col-xs-2" *ngIf="option['price']>0">
+                  <strong>{{option['price'] | currency :'USD':true:'1.2-2'}}</strong>
+                </div>
+              
+            </div>
+             <div class="descriptionContainer _fs11 txt_addondes">  
+             <span *ngIf="option['addon_description']" class="addonDescription">{{option['addon_description']}}</span>
+             </div>
+             </div>
+        </li>
+       
+    </ul>
+</div>

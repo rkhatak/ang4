@@ -25,10 +25,10 @@
                <a href="javascript:void(0)" data-popup="logout" class="hl y-logout" ng-click="logout()">logout</a>
             </li>
              <li *ngIf="!is_login">
-               <a href="javascript:void(0)" data-popup="register" class="hl y-register" ng-click="userRegister()">Register</a>
+               <a href="javascript:void(0)" data-popup="register" class="hl y-register" (click)="userRegister()">Register</a>
             </li>
              <li *ngIf="!is_login">
-               <a href="javascript:void(0)" data-popup="login" class="hl y-login" ng-click="userlogin()">login</a>
+               <a href="javascript:void(0)" data-popup="login" class="hl y-login" (click)="userlogin()">login</a>
             </li>
             
             

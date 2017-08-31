@@ -174,10 +174,10 @@ select:focus, input:focus{outline:0;}
 .navbar{text-align:center;}
 .navbar li{display:inline-block;}
 .navbar a{display:block;text-transform:uppercase;font-weight:700;color:rgb(153, 153, 153);font-size:11px;text-decoration:none;padding-right:21px;letter-spacing:2px;}
-.mymunchado .pageheader .navbar li a:hover, .mymunchado .pageheader .navbar li a.active, .pageheader .navbar li:first-child a:hover, .navbar a:hover, .pageheader  .navbar a:hover{color:rgb(237, 28, 36);}
+.mymunchado .pageheader .navbar li a:hover, .mymunchado .pageheader .navbar li a.active, .navbar a:hover, .pageheader  .navbar a:hover{color:rgb(237, 28, 36);}
 .navbar li.dmdeal{display:none}
-.navbar li.dmdeal + li a, .navbar li:first-child a, .navbar .active a{color:rgb(255, 0, 0);}
-.navbar li.dmdeal + li.deactive a, .navbar li.deactive a{color:rgb(153, 153, 153);}
+.navbar .active a{color:rgb(255, 0, 0);}
+.navbar li.deactive a{color:rgb(153, 153, 153);}
 /**global Button**/
 input.ubtn, .ubtn{border:2px solid rgb(237, 28, 36);font-weight:700;letter-spacing:3px;font-size:11px;padding: 11px 15px;text-decoration:none;color:rgb(237, 28, 36);display: inline-block;text-transform:uppercase;background:#fff;cursor:pointer;}
 input.ubtn{min-height:38px; background:#fff;}

@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div template="ngIf !tokenVarify"><img src="assets/img/with_hand.gif"></div>
+<div template="ngIf !tokenVarify"  style="position: fixed;left: calc(50% - 50px);top: calc(50% - 50px);"><img src="assets/img/with_hand.gif"><br/>Please wait...</div>
 <div template="ngIf tokenVarify">
 <header-app></header-app>
 <router-outlet></router-outlet>
+<app-dialog></app-dialog>
 <app-footer></app-footer>
 </div>

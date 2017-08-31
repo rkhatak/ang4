@@ -1,0 +1,16 @@
+<div class="a_modal hide">
+  <div class="a_modal-dialog" [ngSwitch]="dialogType">
+    <a href="javascript:void(0)" class="i_close close" (click)="closeDialog()">+</a>
+      <app-video-source *ngSwitchCase="'video'"></app-video-source>
+      <app-activity-list *ngSwitchCase="'myActivity'"></app-activity-list>
+      <app-card-item *ngSwitchCase="'addtocart'"></app-card-item>
+      <app-login-source *ngSwitchCase="'login'"></app-login-source>
+      <app-order-details *ngSwitchCase="'orderDetail'"></app-order-details>
+      <app-order-link-form *ngSwitchCase="'linkFormOrder'"></app-order-link-form>
+      <app-register-source *ngSwitchCase="'register'"></app-register-source>
+      <app-reservation-form *ngSwitchCase="'reservation'"></app-reservation-form>
+      <app-reservation-link-form *ngSwitchCase="'linkFormReservation'"></app-reservation-link-form>
+      <app-search-geoaddress *ngSwitchCase="'searchAddress'"></app-search-geoaddress>
+      <app-twitter-register *ngSwitchCase="'twitterlogin'"></app-twitter-register>
+  </div>
+</div>

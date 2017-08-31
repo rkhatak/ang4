@@ -1,3 +1,45 @@
-<p>
-  contact works!
-</p>
+<div *ngIf="_currentRestaurant">
+  <agm-map [latitude]="lat" [longitude]="long">
+    <agm-marker [latitude]="lat" [longitude]="long">
+      <agm-info-window id="r_window_address" [isOpen]="true"><strong>{{_currentRestaurant.address}}</strong></agm-info-window>
+    </agm-marker>
+  </agm-map>
+  <div class="_960px" *ngIf="multipleAddress">
+    <div class="_960px landing_listpanel">
+      <div class="col-md-4 col-sm-4" *ngFor="let resAddress of restaurantAddress">
+        <div class="text-align-center landing_list_contact">
+          <p class="contact_resname" [innerHtml]="resAddress.name"></p>
+          <p class="contact_resaddress">{{resAddress.address}}</p>
+          <p class="contact_resphoneno">{{resAddress.phone}}</p>
+          <a [href]="resAddress.reservationurl | safeUrl" target="_blank" *ngIf="_currentRestaurant.has_reservation" class="ubtn blackbtn _mb15"
+            (click)="action('r',restaurant.id)" target="_blank">reserve a table</a><br>
+          <a href="javascript:void(0)" class="ubtn" (click)="chainRestaurantOrder(resAddress.name,resAddress.id)" target="_blank">order online</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="_960px" *ngIf="!multipleAddress">
+    <div class="text-align-center panel_contactsection">
+      <div class="callout_contact" *ngIf="_currentRestaurant">
+        <p class="sectiontitle">contact</p>
+        <p class="txt_address">
+          <strong>{{_currentRestaurant.address}}</strong>
+        </p>
+
+
+        <p class="txt_contactdetail">
+          <strong>phone</strong>
+          <a href="tel:{{_currentRestaurant.phone_no}}">{{_currentRestaurant.phone_no | numberFormat}}</a>
+        </p>
+
+        <p class="txt_contactdetail">
+          <strong>delivery area</strong> {{_currentRestaurant.delivery_desc}}
+        </p>
+
+        <div class="txt_contactdetail y-resCalender">
+          <strong>hours</strong> Open 24 hours! All year around!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

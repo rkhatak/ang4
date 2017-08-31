@@ -1,0 +1,35 @@
+<div *ngFor="let cartitem of cartItems">
+      <div class="row txt_bs_item item_{{cartitem.uid}}">
+    <div class="col-md-8 col-xs-8" title="{{cartitem.item_name}}">
+    <span class="truncate-text">{{cartitem.item_name}}</span>
+    </div>
+    <strong class="col-md-1 col-xs-1 column">{{cartitem.quantity}}</strong>
+    <p class="col-md-3 col-xs-3 column text-align-right">${{cartitem.item_price *  cartitem.quantity | number : '1.2-2'}}</p>
+    </div>
+   
+    <div *ngIf="cartitem.addons.length > 0" class="t-addons-summary">
+            <div *ngFor="let addon of cartitem.addons" class="row addons-txt txt_bs_item">
+                <span class="col-md-8 col-xs-8 column truncate-text">+ {{addon['optionName']}}</span>
+                <span class="col-md-1 col-xs-1 column review">{{cartitem.quantity}}</span>
+                <span *ngIf="addon['isFree']" class="col-md-3 col-xs-3 column">${{0 | number : '1.2-2'}}</span>
+                <span *ngIf="!addon['isFree']" class="col-md-3 col-xs-3 column text-align-right">${{addon['optionPrice'] *  cartitem.quantity | number : '1.2-2'}}</span>
+    </div>
+            
+    </div>
+    <div *ngIf="cartitem.addons.length > 0" class="t-item-total item-total-txt text-align-right _fs12 _fontarial">${{cartitem.total_item_price | number : '1.2-2'}}</div>
+    
+    <p class="t-item-instructions _fs10 _fontarial">{{cartitem.special_instruction}}</p>  
+    <div class="link_edit clearfix position-relative">
+    <a (click)="editOrder($event)" href="javascript:void(0);" class="t-edit-order edit_{{cartitem.uid}} ubtn" [attr.data-id]="cartitem.uid" [attr.data-toggle]="tooltip" title="Edit Dish">
+      <i class="i_pencil"></i>
+    </a>
+    <a (click)="deleteOrder($event)" href="javascript:void(0);" class="t-delete-order ubtn" [attr.data-id]="cartitem.uid" [attr.data-name]="cartitem.item_name" [attr.data-toggle]="tooltip" title="Remove Dish">
+      <i class="i_wrong">+</i>
+    </a>
+    <div class="tooltip t-tooltip_{{cartitem.uid}} hide">
+      <div class="txt">
+        <p>Are you sure you want to <br>remove <strong>'<span class="itemName_{{cartitem.uid}}">{{cartitem.item_name}}</span>'</strong> from your order?</p>
+        <span (click)="confirmDeleteOrder($event)" class="ubtn blackbtn t-confirm-delete-order" [attr.data-id]="cartitem.uid">YES, DELETE IT</span><span (click)="cancelDeleteOrder($event)" class="ubtn blackbtn t-cancel-delete-order" [attr.data-id]="cartitem.uid">CANCEL</span>
+      </div>
+    </div>
+</div>

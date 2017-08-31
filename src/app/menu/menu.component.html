@@ -1,50 +1,50 @@
-<div class="_960px">
+<div class="_960px" *ngIf="dishes">
                     <p class="sectiontitle">menu</p>            
                     
                     <div class="t-menu-render menutab">
-                        <div class="navbarcontainer">
+                        <div class="navbarcontainer active">
                             <div>
-                                <ul class="unstyled navbar nav md-hide">
-                                    <li class="tab_{{dis.category_id}} tabs {{isDMDeal(dis.category_name)}}" ng-repeat="dis in dishes"><a ng-click="showTab(dis.category_id,dis.category_name);" id="{{dis.category_id}}" href="javascript:;" class="tablink" ng-bind-html="dis.category_name"></a></li>
+                                <ul class="unstyled navbar nav md-hide r_menu_navbar" [style.paddingTop.px]="25">
+                                    <li class="tab_{{dis.category_id}} tabs {{isDMDeal(dis.category_name)}}" *ngFor="let dis of dishes"><a (click)="showTab(dis.category_id,dis.category_name);" id="{{dis.category_id}}" href="javascript:;" class="tablink" [innerHtml]="dis.category_name"></a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div ng-if="restaurantDeal.length>0" class="y_sticky_deal sticky_deal text-align-center"> 
-                            <div ng-repeat="deal in restaurantDeal">
+                        <div *ngIf="restaurantDeal.length>0" class="y_sticky_deal sticky_deal text-align-center"> 
+                            <div *ngFor="let deal of restaurantDeal">
                                 <p class="title_sticky_deal text-uppercase"><span class="color_red">{{deal.title}}</span></p>
                                 <p class="tnc_sticky_deal">Offer valid through {{startDate(deal.start_on)}}. {{deal.condition}}</p>
                             </div>
                         </div>
                         <div class="clearfix">
                             <div class="res_menu y-menu-section">
-                                <div ng-repeat="dis in dishes" class="{{isDMDeal(dis.category_name)}}">
+                                <div *ngFor="let dis of dishes" class="{{isDMDeal(dis.category_name)}}">
                                     <div class="tabs mobilemenutabs xs-hide tab_{{dis.category_id}}">
-                                        <a href="javascript:;" class="tablink" ng-bind-html="dis.category_name" ng-click="showTab(dis.category_id,dis.category_name);"></a>
+                                        <a href="javascript:;" class="tablink" [innerHtml]="dis.category_name" (click)="showTab(dis.category_id,dis.category_name);"></a>
                                     </div>
                                     <div class="menu_{{dis.category_id}} menu_container">
-                                    <div ng-repeat="di in dis.sub_categories">
-                                        <div class="subcategories_level1 sectiontitle" ng-bind-html="di.category_name"></div>
-                                        <div class="menubox" ng-repeat="di_sub in di.sub_categories">
-                                            <div class="subcategories sectiontitle" ng-bind-html="di_sub.category_name"></div>
+                                    <div *ngFor="let di of dis.sub_categories">
+                                        <div class="subcategories_level1 sectiontitle" [innerHtml]="di.category_name"></div>
+                                        <div class="menubox" *ngFor="let di_sub of di.sub_categories">
+                                            <div class="subcategories sectiontitle" [innerHtml]="di_sub.category_name"></div>
                                             <div class="item_menupanel">
-                                                <div class="item_menu t_order_{{di_sub2.online_order_allowed}}" ng-click="addToOrder(di_sub2)" ng-repeat="di_sub2 in di_sub.sub_categories">
-                                                    <div class="img_menu" ng-show="!isEmpty(di_sub2.item_image_url)" >
-                                                        <div style="background-image:url('{{imagePath}}{{di_sub2.item_image_url}}');"></div>
+                                                <div class="item_menu t_order_{{di_sub2.online_order_allowed}}" (click)="addToOrder(di_sub2)" *ngFor="let di_sub2 of di_sub.sub_categories">
+                                                    <div class="img_menu" *ngIf="di_sub2.item_image_url" >
+                                                        <div [style.background]="menuImageSafe(imagePath,di_sub2.item_image_url)"></div>
                                                     </div>
                                                     <div class="item_contentpanel">
-                                                        <p class="txt_restitle"><span ng-bind-html="di_sub2.item_name"></span></p>
-                                                        <p class="txt_resdes"><span ng-bind-html="di_sub2.item_desc"></span></p>
+                                                        <p class="txt_restitle"><span [innerHtml]="di_sub2.item_name"></span></p>
+                                                        <p class="txt_resdes"><span [innerHtml]="di_sub2.item_desc"></span></p>
                                                         <p class="txt_price">${{di_sub2.prices[0].value}}</p>
                                                         <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
                                                     </div>
                                                 </div>
-                                                <div class="item_menu t_order_{{items.online_order_allowed}}" ng-click="addToOrder(items)" ng-repeat="items in di_sub.category_items">
-                                                    <div class="img_menu" ng-show="!isEmpty(items.item_image_url)">
-                                                        <div style="background-image:url('{{imagePath}}{{items.item_image_url}}');"></div>
+                                                <div class="item_menu t_order_{{items.online_order_allowed}}" (click)="addToOrder(items)" *ngFor="let items of di_sub.category_items">
+                                                    <div class="img_menu" *ngIf="items.item_image_url">
+                                                        <div [style.backgroundImage]="menuImageSafe(imagePath,items.item_image_url)"></div>
                                                     </div>
                                                     <div class="item_contentpanel">
-                                                        <p class="txt_restitle"><span ng-bind-html="items.item_name"></span></p>
-                                                        <p class="txt_resdes"><span ng-bind-html="items.item_desc"></span></p>
+                                                        <p class="txt_restitle"><span [innerHtml]="items.item_name"></span></p>
+                                                        <p class="txt_resdes"><span [innerHtml]="items.item_desc"></span></p>
                                                         <p class="txt_price">${{items.prices[0].value}}</p>
                                                         <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
                                                     </div>
@@ -52,13 +52,13 @@
                                             </div>
                                         </div>
                                         <div class="item_menupanel">
-                                            <div class="item_menu t_order_{{items.online_order_allowed}}" ng-click="addToOrder(items)" ng-repeat="items in di.category_items">
-                                                <div class="img_menu" ng-show="!isEmpty(items.item_image_url)">
-                                                    <div style="background-image:url('{{imagePath}}{{items.item_image_url}}');"></div>
+                                            <div class="item_menu t_order_{{items.online_order_allowed}}" (click)="addToOrder(items)" *ngFor="let items of di.category_items">
+                                                <div class="img_menu" *ngIf="items.item_image_url">
+                                                    <div [style.backgroundImage]="menuImageSafe(imagePath,items.item_image_url)"></div>
                                                 </div>
                                                 <div class="item_contentpanel">
-                                                    <p class="txt_restitle"><span ng-bind-html="items.item_name"></span></p>
-                                                    <p class="txt_resdes"><span ng-bind-html="items.item_desc"></span></p>
+                                                    <p class="txt_restitle"><span [innerHtml]="items.item_name"></span></p>
+                                                    <p class="txt_resdes"><span [innerHtml]="items.item_desc"></span></p>
                                                     <p class="txt_price">${{items.prices[0].value}}</p>
                                                     <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
                                                 </div>
@@ -66,13 +66,13 @@
                                         </div>
                                     </div>
                                     <div class="item_menupanel">
-                                        <div class="item_menu t_order_{{items.online_order_allowed}}" ng-click="addToOrder(items)" ng-repeat="items in dis.category_items">
-                                            <div class="img_menu" ng-show="!isEmpty(items.item_image_url)">
-                                                <div style="background-image:url('{{imagePath}}{{items.item_image_url}}');"></div>
+                                        <div class="item_menu t_order_{{items.online_order_allowed}}" (click)="addToOrder(items)" *ngFor="let items of dis.category_items">
+                                            <div class="img_menu" *ngIf="items.item_image_url">
+                                                <div [style.backgroundImage]="menuImageSafe(imagePath,items.item_image_url)"></div>
                                             </div>
                                             <div class="item_contentpanel">
-                                                <p class="txt_restitle"><span ng-bind-html="items.item_name"></span></p>
-                                                <p class="txt_resdes"><span ng-bind-html="items.item_desc"></span></p>
+                                                <p class="txt_restitle"><span [innerHtml]="items.item_name"></span></p>
+                                                <p class="txt_resdes"><span [innerHtml]="items.item_desc"></span></p>
                                                 <p class="txt_price">${{items.prices[0].value}}</p>
                                                 <a href="javascript:void(0)" class="ubtn btn_addtocard btn_addtoorder"><span>ADD TO CART</span></a>
                                             </div>
@@ -92,10 +92,10 @@
                                     <label class="ubtn blackbtn btn_service" for="t_delivery">Delivery</label>
                                     <label class="ubtn btn_service" for="t_takeout">takeout</label>
                                     <div class="t-orderDateTimePanel">
-                                        <div ng-include="getPartial('common', 'cartTime.html')"></div>                                                
+                                        <!--<div ng-include="getPartial('common', 'cartTime.html')"></div>                                                -->
                                     </div>
                                     <div class="ordersummary_delivery ordersummary_service">
-                                        <div ng-if="deliveryOrderCart" class="box_expectedtime _fs12 _mt35 ordertype_location">
+                                        <div *ngIf="deliveryOrderCart" class="box_expectedtime _fs12 _mt35 ordertype_location">
                                             <p class="_fontarial txt_minhours t_distance_text"></p>
                                             <p class="_fs14 txt_upper t_delivery_address">{{setDeliveryAddress}}</p>
                                             <p><a href="javascript:void(0)" class="txtlink t_change_address" title="Edit Address" ng-click="editAddress()">Change</a></p>
@@ -107,8 +107,8 @@
                                         <!--Takeout-->
                                     </div>
                                     <div class="_mt35">
-                                        <p ng-hide="cartLenth" class="txt_bs_noorder t-no-order">There are currently no items in your order. Click on items from the menu to add them to your order.</p>
-                                        <div ng-hide="cartLenthMinOrder" class="txt_bs_noorder _mt10 t-min-order">
+                                        <p *ngIf="!cartLenth" class="txt_bs_noorder t-no-order">There are currently no items in your order. Click on items from the menu to add them to your order.</p>
+                                        <div *ngIf="cartLenthMinOrder" class="txt_bs_noorder _mt10 t-min-order">
                                             Minimum order must exceed: 
                                             <strong>$<span class="t_min_order">{{dishes.minDelivery}}</span>*</strong>
                                             <p class="_fs9">(*excluding tax, tip and delivery charges)</p>
@@ -117,8 +117,8 @@
                                     <div class="box_orderitem _mt35">
                                         <p class="title_bs_order">your order</p>
                                         <div class="container">
-                                            <div ng-if="cartItemDisplay" class="yourorder_box">
-                                                <div ng-repeat="cartitem in cartItems" ng-include="getPartial('common', 'orderItem.html')"></div>                                                
+                                            <div *ngIf="cartItemDisplay" class="yourorder_box">
+                                                <app-order-item [cartItems]="cartItems"></app-order-item>
                                             </div>
                                             <div class="row txt_bs_item _mt35">
                                                 <div class="col-md-8 col-xs-8 text-uppercase">Subtotal</div>
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                    <div ng-show="checkoutDiv" class="checkoutDiv">
+                    <!--<div *ngIf="checkoutDiv" class="checkoutDiv">
                         <p class="msgreservation">Your  <span class="y-order-type"></span> order comes to <strong class="y-order-total"></strong> and brings you one step (and a short walk) closer to food nirvana. </p>
                         <p class="txt_givecall">You can always give us a call at <a href="tel:{{formattedPhoneNo(currentRestaurant.phone_no)}}">{{formattedPhoneNo(currentRestaurant.phone_no)}}</a> to make any changes up to an hour before your {{cartOrderType}} time.</p>
                         <div id="menu_checkout" class="menu_checkout clearfix">
@@ -195,8 +195,8 @@
                                 <div class="box_orderitem _mt35">
                                     <p class="title_bs_order">your order</p>
                                     <div class="container">
-                                        <div ng-if="cartItemDisplay" class="yourorder_box">
-                                                <div ng-repeat="cartitem in cartItems" ng-include="getPartial('common', 'orderItem.html')"></div>                                                
+                                        <div *ngIf="cartItemDisplay" class="yourorder_box">
+                                                <div ngrepeat="cartitem in cartItems" ng-include="getPartial('common', 'orderItem.html')"></div>                                                
                                             </div>
                                         <div class="row txt_bs_item _mt35">
                                             <div class="col-md-8 text-uppercase">Subtotal</div>
@@ -229,5 +229,5 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>-->
+                </div>               
