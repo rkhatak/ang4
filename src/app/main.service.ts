@@ -1,4 +1,4 @@
-import { Injectable, Inject, OnInit,OnDestroy } from '@angular/core';
+import { Injectable, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -22,10 +22,19 @@ export class MainService implements OnDestroy {
     restaurantDeal: any;
     selectedDeal: any = false;
     promocode: any;
+    date: any;
+    time: any;
+    selectedDate: any;
+    selectedTime: any;
+    dates: any;
+    timeEdit: boolean;
+    order_type: string = 'takeout';
+    weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     private onCartChange$Subscription: Subscription;
 
-    
+
     postToken(): Observable<any> {
         let self = this;
         let apiUrl = self.globals.apiBaseUrl + 'auth/token';
@@ -214,8 +223,15 @@ export class MainService implements OnDestroy {
         var self = this;
         let apiUrl = self.getApiUrl('restaurant/operations/' + restId + '?date=' + date);
         return self._http.get(apiUrl)
+            .map((response) => <any>response.json());
+    }
+    candeliver(restId,lat,lng){
+        var self = this;
+        let apiUrl = self.getApiUrl(`restaurant/candeliver/${restId}?lat=${lat}&lng=${lng}`);
+        return self._http.get(apiUrl)
             .map((response: Response) => <any>response.json());
     }
+
 
     cartCalution() {
         var self = this;
@@ -294,13 +310,13 @@ export class MainService implements OnDestroy {
         if (orderType == 'delivery') {
             this.getTipOptions();
             $('.y-tip,.y-tip-desc').removeClass('hide');
-            var tip = $.jStorage.get('tip_' + restId);
+            var tip = self.getStorage('tip_' + restId);
             if (tip !== '') {
                 tipAmount = this.getNumber((subtotal * parseInt(tip)) / 100, 2);
                 total += parseFloat(tipAmount);
             }
             $(".default_tip").html('$' + tipAmount);
-            $.jStorage.set('order_tip_' + restId, tipAmount);
+            self.setStorage('order_tip_' + restId, tipAmount);
             $('.t-deliverycharge').removeClass('hide');
 
             if (delCharge) {
@@ -353,7 +369,7 @@ export class MainService implements OnDestroy {
         var restId = self.globals.globalRestaurantId;
         var text = '<option value="0">No Tip</option>';
         var tips = this.getAllTips();
-        let tip:any = self.getStorage('tip_' + restId);
+        let tip: any = self.getStorage('tip_' + restId);
         $.each(tips, function (per, value) {
             text += '<option value="' + per + '" ' + (tip == per ? "selected" : "") + '>' + per + '% ($' + value + ')</option>';
         });
@@ -382,7 +398,7 @@ export class MainService implements OnDestroy {
         let self = this;
         var restId = self.globals.globalRestaurantId;
         if (JSON.parse(self.getStorage('order_subtotal_' + restId)) > 0) {
-            return parseFloat(this.getNumber((($.jStorage.get('order_subtotal_' + restId) * tip) / 100), 2));
+            return parseFloat(this.getNumber(((JSON.parse(self.getStorage('order_subtotal_' + restId)) * tip) / 100), 2));
         } else {
             return "0.00";
         }
@@ -455,4 +471,187 @@ export class MainService implements OnDestroy {
         }
     }
 
+    getDateSlot(type) {
+        let workingDates = [];
+        let _currentRes = this.globals.currentRestaurantDetail;
+        if (_currentRes) {
+            if (_currentRes.all_delivery_working_days || _currentRes.all_takeout_working_days) {
+                var dates = _currentRes.all_delivery_working_days;
+                if (type !== 'delivery') {
+                    dates = _currentRes.all_takeout_working_days;
+                }
+                $.each(dates, function (key, value) {
+                    var dateObj = {
+                        text: value,
+                        value: key
+                    };
+                    workingDates.push(dateObj);
+                });
+            }
+        }
+        return workingDates;
+    }
+
+    renderDateTime(orderType: any): void {
+        let restId = this.globals.globalRestaurantId;
+        let timeslots = this.getDateSlot(orderType);
+
+
+        if (timeslots.length > 0) {
+            var date = this.getStorage('delivery_order_date_' + restId) ? this.getStorage('delivery_order_date_' + restId) : '';
+            var time = this.getStorage('delivery_order_time_' + restId) ? this.getStorage('delivery_order_time_' + restId) : '';
+            //var hours = $rootScope.currentRestaurant.delivery_hours;
+            if (orderType == 'takeout') {
+                date = this.getStorage('takeout_order_date_' + restId) ? this.getStorage('takeout_order_date_' + restId) : '';
+                time = this.getStorage('takeout_order_time_' + restId) ? this.getStorage('takeout_order_time_' + restId) : '';
+                $('#t_delivery').removeAttr("checked");
+                $('#t_takeout').prop('checked', 'checked');
+                //hours = $rootScope.currentRestaurant.takeout_hours;
+            } else {
+                $('#t_takeout').removeAttr("checked");
+                $('#t_delivery').prop('checked', 'checked');
+            }
+            
+            this.globals.order_type = orderType;
+            this.globals.date = date;
+            this.globals.time = time;
+            this.globals.selectedDate = (date == '') ? timeslots[0].value : date;
+            this.globals.selectedTime = time;
+            this.globals.dates = timeslots;
+            this.globals.timeEdit = false;
+            this.date = date;
+            this.time = time;
+            this.selectedDate = (date == '') ? timeslots[0].value : date;;
+            this.selectedTime = time;
+            this.dates = timeslots;
+            this.timeEdit = false;
+            this.order_type = orderType;
+           
+            //$rootScope.hours=hours;
+            if (typeof date != "undefined" && typeof time != "undefined" && !_.isEmpty(date) && !_.isEmpty(time)) {
+                this.globals.timeEdit = true;
+                this.timeEdit = true;
+            } else {
+                if (date == '' || date == "undefined") {
+                    var firstSlot = _.first(timeslots);
+                    date = firstSlot.value;
+                }
+                this.getDefaultTimeSlots(restId, orderType, date)
+                    .subscribe((data) => {
+                        this.prepareTimeSlot(data);
+                    });
+            }
+            if (date == '' || date == "undefined") {
+                    var firstSlot = _.first(timeslots);
+                    date = firstSlot.value;
+                    
+                }
+           this.date=date;
+            this.getOperationsSlotsFun(date);
+            this.cartCalution();
+            //this.globals.onCartItem();
+           
+            // serverUtilityService.getTipOptions();
+
+        }
+    };
+     getOperationsSlotsFun(d) {
+    let restId = this.globals.globalRestaurantId;
+    this.getOperationsSlots(restId, d).subscribe((data) => {
+      var slots = data.delivery;
+      if (slots == '') {
+        slots = data.reservation;
+      }
+      this.globals.cartTimeEdit=slots.toString(", ");
+      this.globals.onCart();
+    })
+
+  }
+
+    prepareTimeSlot(data: any) {
+    let self = this;
+    var times = data.timeslots,
+      time = _.first(times);
+    let restId = this.globals.globalRestaurantId;
+    var datekey = this.order_type === 'delivery' ? 'delivery_order_date_' + restId : 'takeout_order_date_' + restId;
+    var timekey = this.order_type === 'delivery' ? 'delivery_order_time_' + restId : 'takeout_order_time_' + restId;
+    self.setStorage(datekey, this.date);
+    self.setStorage(timekey, time);
+    self.timeEdit = true;
+    self.renderTimeSlots(data.timeslots, self.order_type);
+    
+    //self.renderDateTime(self.order_type);
+    //self.globals.onCartItem();
+  }
+
+  renderTimeSlots(data, orderType) {
+    let self = this;
+    let options = '';
+    let notSelected = "";
+    var resId = self.globals.globalRestaurantId;
+
+    var selected = self.getStorage('delivery_order_time_' + resId) ? self.getStorage('delivery_order_time_' + resId) : '';
+    if (orderType === 'takeout') {
+      selected = self.getStorage('takeout_order_time_' + resId) ? self.getStorage('takeout_order_time_' + resId) : '';
+    }
+    if (selected === '') {
+      options += '<option value="">Select Time</option>';
+    }
+    
+    _.each(data, function (item) {
+      var select = '';
+      if (item == selected) {
+        select = ' selected';
+        notSelected = select;
+      }
+
+      options += '<option value="' + item + '"' + select + '>' + self.get12HourTime(item) + '</option>';
+    });
+    if (notSelected === '') {
+      if (selected !== '') {
+        notSelected = '<option value="">Select Time</option>';
+      }
+      options = notSelected + options;
+      if (orderType === 'takeout') {
+        self.setStorage('takeout_order_time_' + resId, '');
+      } else {
+        self.setStorage('delivery_order_time_' + resId, '');
+      }
+    }
+    self.globals.cartTime=options;
+    //console.log(self.globals.cartTime);
+    self.globals.onCart();
+    //$('.t-order-time').html(options);
+  };
+
+  getFormattedDateText (date) {
+            let self = this;
+            var tempDate = this.parseDate(date);
+            var tempDate2 = this.parseDate(self.globals.currentRestaurantDetail.current_dateTime);
+            if (tempDate.getDate() === tempDate2.getDate()) {
+                return 'Today';
+            } else {
+                return this.weekdays[tempDate.getDay()] + ", " + this.months[tempDate.getMonth()] + " " + tempDate.getDate();
+            }
+        }
+
+        getCheckTakeout() {
+            let self=this;
+            var restId =self.globals.globalRestaurantId;
+            self.setStorage('order_type_' + restId, 'takeout');
+            self.setStorage("select_delivery_" + restId, 'takeout');
+            $("#t_delivery").prop("checked", false);
+            $('#t_takeout').prop("checked", true);
+            self.globals.deliveryOrderCart = false;
+            self.globals.onCart();
+            self.renderDateTime('takeout');
+            self.hidePopUp();
+            if (self.getStorage('addtoOrder_' + restId) && self.getStorage('addtoOrder_' + restId) !== '') {
+                self.setStorage('addtoOrder_' + restId, '');
+            }
+            if (self.getStorage('select_delivery_' + restId) && self.getStorage('select_delivery_' + restId) !== '') {
+                self.setStorage('select_delivery_' + restId, '');
+            }
+            // ga('send', 'event', 'Order Summary', "Order Takeout" , "Click_on_order_takeout_Button", 1, true);
+        }
 }

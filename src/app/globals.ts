@@ -24,6 +24,9 @@ export class Globals {
     dates:any;
     timeEdit:boolean;
     cartItems:any;
+    deliveryOrderCart:boolean;
+    cartTime:any;
+    cartTimeEdit:any;
     onThemeSetEvent = new Subject<object>()
     onDialogType = new Subject<object>()
     onCartChange = new Subject<any>()

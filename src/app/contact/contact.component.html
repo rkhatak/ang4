@@ -1,9 +1,6 @@
+<div id  ="viewmap" style="height:350px"></div>
 <div *ngIf="_currentRestaurant">
-  <agm-map [latitude]="lat" [longitude]="long">
-    <agm-marker [latitude]="lat" [longitude]="long">
-      <agm-info-window id="r_window_address" [isOpen]="true"><strong>{{_currentRestaurant.address}}</strong></agm-info-window>
-    </agm-marker>
-  </agm-map>
+ 
   <div class="_960px" *ngIf="multipleAddress">
     <div class="_960px landing_listpanel">
       <div class="col-md-4 col-sm-4" *ngFor="let resAddress of restaurantAddress">

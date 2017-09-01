@@ -4,12 +4,12 @@
                     <div class="t-menu-render menutab">
                         <div class="navbarcontainer active">
                             <div>
-                                <ul class="unstyled navbar nav md-hide r_menu_navbar" [style.paddingTop.px]="25">
+                                <ul class="unstyled navbar nav md-hide r_menu_navbar">
                                     <li class="tab_{{dis.category_id}} tabs {{isDMDeal(dis.category_name)}}" *ngFor="let dis of dishes"><a (click)="showTab(dis.category_id,dis.category_name);" id="{{dis.category_id}}" href="javascript:;" class="tablink" [innerHtml]="dis.category_name"></a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div *ngIf="restaurantDeal.length>0" class="y_sticky_deal sticky_deal text-align-center"> 
+                        <div *ngIf="menuDeals" class="y_sticky_deal sticky_deal text-align-center"> 
                             <div *ngFor="let deal of restaurantDeal">
                                 <p class="title_sticky_deal text-uppercase"><span class="color_red">{{deal.title}}</span></p>
                                 <p class="tnc_sticky_deal">Offer valid through {{startDate(deal.start_on)}}. {{deal.condition}}</p>
@@ -87,12 +87,12 @@
                                 </div>
                                 <p class="txt_ordersummary">order summary</p>
                                 <div id="menu_ordersection">
-                                    <input type="radio" name="munchservices" ng-model="munchservices" ng-click='getCheckDelivery()' value="delivery" id="t_delivery" hidden>
-                                    <input type="radio" name="munchservices" ng-model="munchservices" ng-click='getCheckTakeout()' value="takeout" id="t_takeout" checked="checked" hidden>
+                                    <input type="radio" name="munchservices" (click)='getCheckDelivery()' value="delivery" id="t_delivery" hidden>
+                                    <input type="radio" name="munchservices" (click)='getCheckTakeout()' value="takeout" id="t_takeout" checked="checked" hidden>
                                     <label class="ubtn blackbtn btn_service" for="t_delivery">Delivery</label>
                                     <label class="ubtn btn_service" for="t_takeout">takeout</label>
                                     <div class="t-orderDateTimePanel">
-                                        <!--<div ng-include="getPartial('common', 'cartTime.html')"></div>                                                -->
+                                        <app-cart-time [globalObj]="globalObj"></app-cart-time>
                                     </div>
                                     <div class="ordersummary_delivery ordersummary_service">
                                         <div *ngIf="deliveryOrderCart" class="box_expectedtime _fs12 _mt35 ordertype_location">

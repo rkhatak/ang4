@@ -35,6 +35,7 @@ import { OrderLinkFormComponent } from './order-link-form/order-link-form.compon
 import { AddonsComponent } from './addons/addons.component';
 import { TemplateVaribaleDirective } from './template-varibale.directive';
 import { OrderItemComponent } from './order-item/order-item.component';
+import { CartTimeComponent } from './cart-time/cart-time.component';
 
 @NgModule({
   declarations: [
@@ -64,14 +65,15 @@ import { OrderItemComponent } from './order-item/order-item.component';
     OrderLinkFormComponent,
     AddonsComponent,
     TemplateVaribaleDirective,
-    OrderItemComponent
+    OrderItemComponent,
+    CartTimeComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,Ng2PageScrollModule,PageSliderModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCXT_lsfclOy7_1PHp2lFfoM-Ujwb3-cdA'
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyCXT_lsfclOy7_1PHp2lFfoM-Ujwb3-cdA'
+    // }),
     RouterModule.forRoot([
       {
         path: 'home',
