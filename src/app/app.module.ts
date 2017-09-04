@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
+import { FormsModule} from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import {LocalStorageService, LocalStorage} from 'ng2-webstorage';
 import { AppComponent } from './app.component';
@@ -70,7 +71,7 @@ import { CartTimeComponent } from './cart-time/cart-time.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,Ng2PageScrollModule,PageSliderModule,
+    HttpModule,Ng2PageScrollModule,PageSliderModule,FormsModule,
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyCXT_lsfclOy7_1PHp2lFfoM-Ujwb3-cdA'
     // }),

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy,EventEmitter,Output} from '@angular/core';
 import { MainService } from '../main.service';
 import { Globals } from '../globals';
 import { Subscription } from 'rxjs/Subscription';
@@ -18,6 +18,7 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     });
   }
   onThemeSetEvent$Subscription: Subscription;
+   @Output() updateCart = new EventEmitter<any>();
   cartCount: any;
   @Input()
   cartItems: any;
@@ -60,6 +61,46 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     self.mservice.setStorage('order_items_' + restId, JSON.stringify(order_items));
     self.cartItems = order_items;
     self.mservice.cartCalution();
+  }
+
+  editOrder(e){
+    let self = this;
+    let restId = self.globals.globalRestaurantId;
+    var radioValidated = true;
+        var i=0;
+        _.each($(".addon-collection[data-selection-type=0]"),function(addonGroup){
+            var parent = $(addonGroup);
+            if(!$(":checked",parent).length) {
+                $(".addon-error-message",parent).removeClass("hide");                   
+                if(i===0){                   
+                    var container = $('.a_area'),
+                    scrollTo = $(".addon-error-message",parent);
+                    container.stop().animate({
+                        scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()-50
+                    });
+                    i++;                        
+                }                    
+                radioValidated = false;
+            }else{
+                $(".addon-error-message",parent).addClass("hide");                    
+            }
+        });
+
+        if(!radioValidated) {
+            return false;
+        }
+
+        var id = $(e.currentTarget).attr('data-id');
+           
+            var order_items =JSON.parse(this.mservice.getStorage('order_items_' +restId));
+            var model = _.find(order_items, function (el:any) {
+                 return el.uid == id;
+            });
+
+            model.prices = [{id: model.price_id, value: model.item_price}];
+            this.updateCart.emit(model);
+            //this.cartItems=model;
+            
   }
 
 }

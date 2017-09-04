@@ -36,6 +36,7 @@ export class CardItemComponent implements OnInit, OnDestroy {
       this.items = this.globals.items;
       this.addonsDisplay = this.globals.addonsDisplay;
       this.sub_total = this.cart.sub_total ? this.cart.sub_total : this.cart.prices[0].value;
+      console.log(this.sub_total);
       this.total = this.sub_total * this.cart.quantity;
       this.total = (100 * this.total / 100);
     })

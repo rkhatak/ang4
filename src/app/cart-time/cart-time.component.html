@@ -1,17 +1,15 @@
  <div class="box_expectedtime _fs14">
   <p class="_fontarial">Expected Time of <span class="text-capitalize">{{order_type}}</span>:</p>
-
-        <div *ngIf='timeEdit'>
+        <div [hidden]="!timeEdit">
         <p class="txt_upper">{{dateText(date)}}, {{hourTime(time)}}</p>
         <p class="txt_minhours">Hours: <span class="t-operation-hours">{{cartTimeEdit}}</span></p>
         <a href="javascript:void(0)" class="txtlink t-changeTime" (click)="changeTime()">Change</a>       
         </div>
-        <div *ngIf='!timeEdit' class="panel_selectexpectedtime">
-              <select class="t-order-date" (change)="dayChange(selectedDate)">       
-                 <option *ngFor="let date of dates" [value]="date['value']" [innerHtml]="date['text']"></option>
+        <div [hidden]="timeEdit" class="panel_selectexpectedtime">
+              <select class="t-order-date" [ngModel]="date" (change)="dayChange($event)">       
+                 <option *ngFor="let opdate of dates" [selected]="date==opdate" [value]="opdate['value']" [innerHtml]="opdate['text']"></option>
               </select>
-              
-              <select class="t-order-time cartTime" (change)="saveDateTime(selectedSize)" #cartTime></select>
+              <select class="t-order-time cartTime" [ngModel]="time" (change)="saveDateTime(selectedSize)" #cartTime></select>
         </div>     
        <!--  <p><a href="javascript:;" class="txtlink t-saveDateTime">Submit</a></p> -->
    <div *ngIf='tooltipselecttime' class="tooltip lightbox tooltipselecttime">

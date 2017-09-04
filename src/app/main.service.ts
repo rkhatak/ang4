@@ -150,7 +150,7 @@ export class MainService implements OnDestroy {
         return self._http.get(apiUrl)
             .map((response: Response) => <any>response.json());
 
-    };
+    };   
 
     digitToString(digit) {
         digit = parseInt(digit, 10);
@@ -492,6 +492,45 @@ export class MainService implements OnDestroy {
         return workingDates;
     }
 
+    
+    editRenderDateTime(orderType: any): void {
+        let restId = this.globals.globalRestaurantId;
+        let timeslots = this.getDateSlot(orderType);
+
+
+        if (timeslots.length > 0) {
+            var date = this.getStorage('delivery_order_date_' + restId) ? this.getStorage('delivery_order_date_' + restId) : '';
+            var time = this.getStorage('delivery_order_time_' + restId) ? this.getStorage('delivery_order_time_' + restId) : '';
+            //var hours = $rootScope.currentRestaurant.delivery_hours;
+            if (orderType == 'takeout') {
+                date = this.getStorage('takeout_order_date_' + restId) ? this.getStorage('takeout_order_date_' + restId) : '';
+                time = this.getStorage('takeout_order_time_' + restId) ? this.getStorage('takeout_order_time_' + restId) : '';
+                $('#t_delivery').removeAttr("checked");
+                $('#t_takeout').prop('checked', 'checked');
+                //hours = $rootScope.currentRestaurant.takeout_hours;
+            } else {
+                $('#t_takeout').removeAttr("checked");
+                $('#t_delivery').prop('checked', 'checked');
+            }
+            
+            this.globals.order_type = orderType;
+          
+            this.order_type = orderType;
+           
+                    var firstSlot = _.first(timeslots);
+                    date = firstSlot.value;
+               
+                this.getDefaultTimeSlots(restId, orderType, date)
+                    .subscribe((data) => {
+                        this.prepareTimeSlot(data);
+                    });
+           
+           
+            this.getOperationsSlotsFun(date);
+            this.cartCalution();
+        }
+    };
+
     renderDateTime(orderType: any): void {
         let restId = this.globals.globalRestaurantId;
         let timeslots = this.getDateSlot(orderType);
@@ -528,10 +567,12 @@ export class MainService implements OnDestroy {
             this.order_type = orderType;
            
             //$rootScope.hours=hours;
-            if (typeof date != "undefined" && typeof time != "undefined" && !_.isEmpty(date) && !_.isEmpty(time)) {
+            // if (typeof date != "undefined" && typeof time != "undefined" && !_.isEmpty(date) && !_.isEmpty(time)) {
+            //     this.globals.timeEdit = true;
+            //     this.timeEdit = true;
+            // } else {
                 this.globals.timeEdit = true;
                 this.timeEdit = true;
-            } else {
                 if (date == '' || date == "undefined") {
                     var firstSlot = _.first(timeslots);
                     date = firstSlot.value;
@@ -540,12 +581,12 @@ export class MainService implements OnDestroy {
                     .subscribe((data) => {
                         this.prepareTimeSlot(data);
                     });
-            }
-            if (date == '' || date == "undefined") {
-                    var firstSlot = _.first(timeslots);
-                    date = firstSlot.value;
+            //}
+            // if (date == '' || date == "undefined") {
+            //         var firstSlot = _.first(timeslots);
+            //         date = firstSlot.value;
                     
-                }
+            //     }
            this.date=date;
             this.getOperationsSlotsFun(date);
             this.cartCalution();
@@ -584,6 +625,25 @@ export class MainService implements OnDestroy {
     //self.globals.onCartItem();
   }
 
+  renderTimeSlotsNoHtml(data, orderType) {
+    let self = this;
+    let options = '';
+    let notSelected = "";
+    var resId = self.globals.globalRestaurantId;
+   
+      options = notSelected + options;
+      if (orderType === 'takeout') {
+        self.setStorage('takeout_order_time_' + resId, '');
+      } else {
+        self.setStorage('delivery_order_time_' + resId, '');
+      }
+   
+    self.globals.cartTime=data;
+   // console.log(self.globals.cartTime);
+    self.globals.onCart();
+    //$('.t-order-time').html(options);
+  };
+
   renderTimeSlots(data, orderType) {
     let self = this;
     let options = '';
@@ -619,7 +679,7 @@ export class MainService implements OnDestroy {
       }
     }
     self.globals.cartTime=options;
-    //console.log(self.globals.cartTime);
+   // console.log(self.globals.cartTime);
     self.globals.onCart();
     //$('.t-order-time').html(options);
   };

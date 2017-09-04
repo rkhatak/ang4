@@ -118,7 +118,7 @@
                                         <p class="title_bs_order">your order</p>
                                         <div class="container">
                                             <div *ngIf="cartItemDisplay" class="yourorder_box">
-                                                <app-order-item [cartItems]="cartItems"></app-order-item>
+                                                <app-order-item [cartItems]="cartItems" (updateCart)="updateToOrder($event)"></app-order-item>
                                             </div>
                                             <div class="row txt_bs_item _mt35">
                                                 <div class="col-md-8 col-xs-8 text-uppercase">Subtotal</div>

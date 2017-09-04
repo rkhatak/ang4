@@ -212,6 +212,31 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.globals.dialogType="addtocart";
     this.globals.onDialogSet();
   }
+
+  updateToOrder(model){
+    let restId = this.globals.globalRestaurantId;
+    this.cart = model;
+    
+    this.cart.imagePath = this.imagePath;
+    let eModelAddonsLen=model.addons.length;
+    let eModelAddons=model.addons;
+    
+    let AdPrice:any=0;
+    if(eModelAddonsLen>0){
+      for(let i=0;i<=eModelAddonsLen;i++){
+        if(eModelAddons[i]){
+        AdPrice=eModelAddons[i]['optionPrice'];
+        }
+      } 
+    }
+    this.cart.menuPrices = model.prices[0].value;
+    this.cart.sub_total = parseFloat(model.prices[0].value)+ parseFloat(AdPrice);
+    this.addons(model.item_id, model.price_id, model.addons);
+    this.globals.cart=this.cart;
+    this.globals.onCart();
+    this.globals.dialogType="addtocart";
+    this.globals.onDialogSet();
+  }
   addons(menuId, menuPriceId, addons){
     this.mservice.getRestaurantMenuAddons(menuId).subscribe((data)=>{
       if (data.length) {
