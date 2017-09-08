@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy,EventEmitter,Output} from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { MainService } from '../main.service';
 import { Globals } from '../globals';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,15 +11,17 @@ declare var $: any;
   styleUrls: ['./order-item.component.css'],
 })
 export class OrderItemComponent implements OnInit, OnDestroy {
-
+  cartCount: any;
   constructor(private mservice: MainService, private globals: Globals) {
     this.onThemeSetEvent$Subscription = this.globals.onThemeSetEvent.subscribe((data: any) => {
+      if(typeof data!='undefined'){
       this.cartCount = data.cartCount;
+      }
     });
   }
   onThemeSetEvent$Subscription: Subscription;
-   @Output() updateCart = new EventEmitter<any>();
-  cartCount: any;
+  @Output() updateCart = new EventEmitter<any>();
+
   @Input()
   cartItems: any;
   ngOnInit() {
@@ -63,44 +65,20 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     self.mservice.cartCalution();
   }
 
-  editOrder(e){
+  editOrder(e) {
     let self = this;
     let restId = self.globals.globalRestaurantId;
-    var radioValidated = true;
-        var i=0;
-        _.each($(".addon-collection[data-selection-type=0]"),function(addonGroup){
-            var parent = $(addonGroup);
-            if(!$(":checked",parent).length) {
-                $(".addon-error-message",parent).removeClass("hide");                   
-                if(i===0){                   
-                    var container = $('.a_area'),
-                    scrollTo = $(".addon-error-message",parent);
-                    container.stop().animate({
-                        scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()-50
-                    });
-                    i++;                        
-                }                    
-                radioValidated = false;
-            }else{
-                $(".addon-error-message",parent).addClass("hide");                    
-            }
-        });
+    var id = $(e.currentTarget).attr('data-id');
 
-        if(!radioValidated) {
-            return false;
-        }
+    var order_items = JSON.parse(this.mservice.getStorage('order_items_' + restId));
+    var model = _.find(order_items, function (el: any) {
+      return el.uid == id;
+    });
 
-        var id = $(e.currentTarget).attr('data-id');
-           
-            var order_items =JSON.parse(this.mservice.getStorage('order_items_' +restId));
-            var model = _.find(order_items, function (el:any) {
-                 return el.uid == id;
-            });
+    //model.prices = [{id: model.price_id, value: model.item_price}];
+    this.updateCart.emit(model);
+    //this.cartItems=model;
 
-            model.prices = [{id: model.price_id, value: model.item_price}];
-            this.updateCart.emit(model);
-            //this.cartItems=model;
-            
   }
 
 }

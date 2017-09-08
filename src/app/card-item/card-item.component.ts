@@ -33,13 +33,77 @@ export class CardItemComponent implements OnInit, OnDestroy {
   constructor(public mservice: MainService, private globals: Globals, @Inject(DOCUMENT) private document: any) {
     this.onCartChange$Subscription = this.globals.onCartChange.subscribe(() => {
       this.cart = this.globals.cart;
+      //console.log(this.cart);
       this.items = this.globals.items;
       this.addonsDisplay = this.globals.addonsDisplay;
       this.sub_total = this.cart.sub_total ? this.cart.sub_total : this.cart.prices[0].value;
-      console.log(this.sub_total);
       this.total = this.sub_total * this.cart.quantity;
       this.total = (100 * this.total / 100);
     })
+  }
+  changeItemPrice(){
+    let restId = this.globals.globalRestaurantId;
+    let newVal =  ($(".y_price_select option:selected").attr('priceattr')).split("-"); 
+    let menuId=$.trim($('#item_id').val());
+    $("#price_id").val(newVal[0]);
+    $("#item_price").val(newVal[1]);
+    $("#price_desc").val(newVal[2]);
+    this.cart.menuPrices=newVal[1]  ;
+    this.globals.cart.menuPrices=this.cart.menuPrices;
+    this.globals.onCart();
+    let id = $("#uid").val(),addons=[];
+    let order_items =JSON.parse(this.mservice.getStorage('order_items_'+restId));
+    if(order_items.length>0){
+            let arIndex=0;
+            for(let i=0;i<order_items.length;i++){
+              if(order_items[i].uid==id){
+                arIndex=i;
+              }
+            }
+            var model =_.find(order_items, function(el:any) { return el.uid === id; });
+            order_items.splice(arIndex,1);
+            
+            if(model){
+              _.each(model,function(i,v){
+                model['item_price']=newVal[1];
+                model['price_id']=newVal[0];
+                model['price_desc']=newVal[2];
+              })
+              order_items.push(model);
+              this.mservice.setStorage('order_items_'+restId,JSON.stringify(order_items));
+               addons = model.addons;
+            }
+            let menuPriceId=newVal[0];
+            this.addons(menuId,menuPriceId,addons);
+        }
+    this.sub_total = newVal[1];
+    this.total = this.sub_total * this.cart.quantity;
+    this.total = (100 * this.total / 100);
+    this.globals.cart.sub_total=this.sub_total;
+    this.globals.onCart();
+  }
+   addons(menuId, menuPriceId, addons){
+    this.mservice.getRestaurantMenuAddons(menuId).subscribe((data)=>{
+      if (data.length) {
+      let dataSort= data.filter(el => el.menu_price_id == menuPriceId);
+      var items = dataSort[0];
+      items['selected_options'] = addons;
+      this.items = items;
+      this.globals.items=this.items;
+      this.addonsDisplay = true;
+      this.globals.addonsDisplay=true;
+      this.globals.onCart();
+    }else{
+      this.globals.items=[];
+      this.globals.addonsDisplay=false;
+      this.globals.onCart();
+    }
+    },(err)=>{
+      this.globals.items=[];
+      this.globals.addonsDisplay=false;
+      this.globals.onCart();
+    })
+
   }
   ngOnInit() {
     this.cart = this.globals.cart;
@@ -116,8 +180,10 @@ export class CardItemComponent implements OnInit, OnDestroy {
         "item_image_url": $('#item_image_url').val(),
         "item_name": $('#item_name').val(),
         "item_desc": $('#item_desc').val(),
+        "prices":this.cart.prices,
         "quantity": $('#quantity').val(),
         "price_id": $('#price_id').val(),
+        "price_desc": $('#price_desc').val(),
         "item_price": $('#item_price').val(),
         "sub_total": $('.sub-total').html(),
         "total_item_price": $('.total').html(),

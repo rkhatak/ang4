@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { MenuComponent } from './menu/menu.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ContactComponent } from './contact/contact.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { ReplaceTagDirective } from '../directives/replace-tag.directive';
 import { FooterComponent } from './footer/footer.component';
 import { SafePipe } from './safe.pipe';
@@ -37,6 +38,8 @@ import { AddonsComponent } from './addons/addons.component';
 import { TemplateVaribaleDirective } from './template-varibale.directive';
 import { OrderItemComponent } from './order-item/order-item.component';
 import { CartTimeComponent } from './cart-time/cart-time.component';
+import { OwlModule } from 'ng2-owl-carousel';
+
 
 @NgModule({
   declarations: [
@@ -67,11 +70,12 @@ import { CartTimeComponent } from './cart-time/cart-time.component';
     AddonsComponent,
     TemplateVaribaleDirective,
     OrderItemComponent,
-    CartTimeComponent
+    CartTimeComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule,Ng2PageScrollModule,PageSliderModule,FormsModule,
+    HttpModule,Ng2PageScrollModule,PageSliderModule,FormsModule,OwlModule,
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyCXT_lsfclOy7_1PHp2lFfoM-Ujwb3-cdA'
     // }),
@@ -95,6 +99,34 @@ import { CartTimeComponent } from './cart-time/cart-time.component';
       {
         path: 'contact',
         component: ContactComponent
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
+      },
+      {
+        path: ':id/home',
+        component: HomeComponent
+      },
+      {
+        path: ':id/about',
+        component: AboutComponent
+      },
+      {
+        path: ':id/menu',
+        component: MenuComponent
+      },
+      {
+        path: ':id/gallery',
+        component: GalleryComponent
+      },
+      {
+        path: ':id/contact',
+        component: ContactComponent
+      },
+      {
+        path: ':id/checkout',
+        component: CheckoutComponent
       },
       {
         path: '',

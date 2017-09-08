@@ -7,7 +7,8 @@ export class Globals {
     globalRestaurantId :number=0;
     globalTheme :string='';
     baseThemeImage :string='assets/template/themes/';
-    currentRestaurantDetail :any=''; 
+    currentRestaurantDetail :any='';
+    currentUser:any; 
     dialogType :string='loader';
     cart :any; 
     addons :any; 
@@ -27,6 +28,7 @@ export class Globals {
     deliveryOrderCart:boolean;
     cartTime:any;
     cartTimeEdit:any;
+    tooltipselecttime:boolean=false;
     onThemeSetEvent = new Subject<object>()
     onDialogType = new Subject<object>()
     onCartChange = new Subject<any>()

@@ -1,3 +1,67 @@
-<p>
-  register-source works!
-</p>
+<style type="text/css">
+  .a_modal-dialog{max-width:840px;}
+</style>
+  <div class="_p30 _popupregister">
+    <div class="sectiontitle _mb40">
+      register now
+      <p class="_fs12 _fontarial">Already registered? <a href="javascript:void(0)" class="txtlink y-login" ng-click="userlogin()">Sign in</a></p>
+    </div>
+    <div class="btn_soicalmedia">
+      <a href="javascript:void(0);" class="sbtn btn_fb" id="r_socialFacebookBtn" ng-click="fbLogin()"><i class="gi i_fb"></i>Connect with Facebook</a>
+      <a href="javascript:void(0);" class="sbtn btn_google" id="r_i_gplus" ng-click="gpLogin()"><i class="gi i_google"></i>Connect with Google +</a>
+      <a href="javascript:void(0);" class="sbtn btn_twitter" id="r_socialTwitterBtn" ng-click="twLogin()"><i class="gi i_twitter"></i>Connect with Twitter</a>
+    </div>
+    <p class="title_checkout">register with your email address</p>
+
+    <div class="_fontarial registerpopup">
+      <div class="_mb15 row">
+        <label class="col-md-4 col-sm-4 text-align-md-right text-align-sm-right txt_checkoutlabel _pr0">Name</label>
+        <div class="col-md-8 col-sm-8 inputtwo">
+        <input type="text" id="first_name" placeholder="Enter first name">
+        <input type="text" id="last_name" placeholder="Enter last name">
+        <p class="error-message r_error_user_name hide">Hey, you forgot something</p>
+        </div>
+      </div>
+      <div class="_mb15 row">
+        <label class="col-md-4 col-sm-4 text-align-md-right text-align-sm-right txt_checkoutlabel _pr0">Email Address</label>
+        <div class="col-md-8 col-sm-8">
+        <input type="text" id="email_signup">
+        <p class="error-message r_error_email hide">Hey, you forgot something</p>
+        </div>
+      </div>
+      <div class="row _mb15">
+
+        <label class="col-md-4 col-sm-4 text-align-md-right text-align-sm-right txt_checkoutlabel _pr0">Password</label>
+            <div class="col-md-8 col-sm-8">
+        <input type="password" id="password_signup">
+
+        <p class="error-message r_error_password hide">Whoa now, we can't let you go without a password.</p>
+        </div>
+      </div>
+      <div class="_mb15 row">
+        <label class="col-md-4 col-sm-4 text-align-md-right text-align-sm-right txt_checkoutlabel _pr0">Enter the number</label>
+        <div class="col-md-8 col-sm-8">
+
+        <div class="panel_captch">
+         <div id="r_capcha_filter">{{capcha}}</div>
+        <input type="text" id="r_captcha" maxlength="3">
+        </div>
+         <p class="error-message r_error_capcha_filter hide">Hey, you forgot something</p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-4 col-sm-4">&nbsp;</label>
+        <div class="col-md-8 col-sm-8">
+        <p class="error-invalid-register hide"></p>
+        <p class="_fs12 _mb15 txt_terms">
+                  By registering, you accept our <a href="https://munchado.com/terms" target="_blank">Terms</a> and the <a href="https://munchado.com/privacy" target="_blank">Privacy Policy</a>.
+               </p>
+        <a href="javascript:void(0)" class="ubtn blackbtn r_btn_registration" ng-click="normalRegister()">REGISTER</a>
+        <span class="lineloader register_loader hide">  <span></span><span></span><span></span></span>
+        
+    </div>
+        
+        
+    </div>
+
+  </div>

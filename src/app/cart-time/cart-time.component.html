@@ -12,7 +12,8 @@
               <select class="t-order-time cartTime" [ngModel]="time" (change)="saveDateTime(selectedSize)" #cartTime></select>
         </div>     
        <!--  <p><a href="javascript:;" class="txtlink t-saveDateTime">Submit</a></p> -->
-   <div *ngIf='tooltipselecttime' class="tooltip lightbox tooltipselecttime">
+
+   <div [hidden]='!tooltipselect' id="r_tooltipselecttime" class="tooltip lightbox tooltipselecttime">
         <p class="txt">You need to select a date and time from the restaurant’s available slots to proceed with your order.<a href="javascript:void(0)" class="i_close btn_close" (click)="hideToolTip()">+</a></p>
     </div>
   </div>

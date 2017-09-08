@@ -1,17 +1,9 @@
- <kb-page-slider [showIndicator]="true" dotColor="black"
-                        [(page)]="pageNumber" (pageCountChange)="pageCount = $event">
- 
-            <!-- Pages -->
-            <div *kbPages="let page of galleries" [style.background]="backImage (page.imgurl)"></div>
- 
-            <!-- Navigation Buttons -->
-            <kb-nav-button backward [showBackground]="true"
-                        [(page)]="pageNumber" [pageCount]="pageCount">
-            </kb-nav-button>
- 
-            <kb-nav-button forward [showBackground]="true"
-                        [(page)]="pageNumber" [pageCount]="pageCount">
-            </kb-nav-button>
- 
-        </kb-page-slider>
+<owl-carousel
+[options]="{items: 1, dots: true, navigation: true,nav:true}"
+[items]="galleries"
+[carouselClasses]="['owl-theme', 'row', 'sliding']">
+<div class="item" *ngFor="let image of galleries;let i = index">
+    <div class="thumbnail-image" ><img src="{{image.imgurl}}" width="100%"/></div>
+</div>
+</owl-carousel>
 

@@ -30,17 +30,17 @@ export class AddonsComponent implements OnInit {
   public set items(values) {
     if (!values)
       return;
-
     for (let i = 0; i < values.addons.length; i++) {
       let obj = values.addons[i];
       obj.inputType = obj['selection_type'] == 1 ? "checkbox" : "radio";
       for (let j = 0; j < obj.options.length; j++) {
         let option = obj.options[j];
         for (let k = 0; k < values.selected_options.length; k++) {
-          let selectedObj = values.selected_options[j];
-          if (option._id == selectedObj.id) {
+          let selectedObj = values.selected_options[k];
+          if (option.id == selectedObj.optionId) {
             option.inputCheck = true;
           }
+          
         }
       }
     }

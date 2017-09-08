@@ -49,4 +49,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     .subscribe(themedata =>this.loadHomeDetails(themedata));
   }
 
+   loadVideo(){
+    this.globals.dialogType="video";
+    this.globals.onDialogSet();
+  }
+
 }

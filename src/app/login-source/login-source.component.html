@@ -1,3 +1,68 @@
-<p>
-  login-source works!
-</p>
+ <style type="text/css">
+    .a_modal-dialog{max-width:840px;}
+  </style>
+  <div class="_p30 loginpopup">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 border_login">
+          <div ng-if="toLoginUser">
+              <p class="sectiontitle">sign in using your <br />munch ado account</p>
+              <p class="txt_loginsubtitle">Enter your email address and password to login
+              </p>
+              <div class="form_login">
+                  <div>
+                      <label class="txt_checkoutlabel">Email Address</label>
+                      <input type="text" name="user_email" id="user_email">
+                      <p class="error-message user_email_error hide">Hey, you forgot something</p>
+                  </div>
+                  <div>
+                      <label class="txt_checkoutlabel">Password:</label>
+                      <input type="password" name="user_password" id="user_password">
+                      <p class="error-message user_password_error hide"></p>
+                  </div>
+                  <a href="javascript:void(0)" class="link_forgot" ng-click="forgotPassword()">Forgot your password?</a>
+                  <div class="invalid-login hide">
+                      <div class="error-message" id="invalid-login"></div>
+                  </div>
+                  <a href="javascript:void(0)" class="ubtn y-btn-signIn" ng-click="login()">SIGN IN</a>
+              </div>
+          </div>
+          <div ng-if="!toLoginUser && !forgotSuccess">
+              <div class="leftBox box fleft"><h3 class="padBtm6px">Oh no, You Forgot<br class="hidden-xs"> Your Password<b class="font_arial">?</b></h3>
+                  <p class="mrgT10 mrgB10">We’ll start looking for it, just enter the email address you used to register and we’ll send it, or a temporary one over right away so you can reset your password and get back into Munch Ado!</p>
+                  <div class="RegisterationForm fleft width100p">
+                          <div class="errorinputglobal">
+                              <div class="label">Email Address</div>
+                              <input name="email" id="forgot_email" class="medium width95p mrgT5" type="text">
+                              <span class="error-message user_forgotemail_error hide">Hey, you forgot something</span>
+                          </div>
+                          <div class="invalid-forgotpass hide">
+                              <div class="error-message" id="invalid-forgotpass"></div>
+                          </div>
+                          <span id="invalid-forgot-password" class="error-message hide"></span>
+                          <div class="fleft width100p">
+                              <a href="javascript:void(0)" class="ubtn y-btn-signIn" ng-click="forgotPassSubmit()">SUBMIT</a>
+                              <a href="javascript:void(0);" class="custom-login" ng-click="backToLogin()"> Go Back</a>
+                              <span class="processing loadmargin"></span>
+                          </div>
+                          
+                  </div></div> 
+          </div>
+          <div ng-if="!toLoginUser && forgotSuccess">
+              <div class="leftBox box fleft"><h3>We've Sent Your<br>Password to Your<br>Email Address<b class="font_arial">.</b></h3>
+<p class="mrgT10 mrgB10">If you don't receive the email within a few minutes, check your email's spam and junk filters/settings.</p>
+<a href="javascript:void(0);" class="custom-login orangebtn" ng-click="backToLogin()">Sign In</a></div>
+          </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <p class="sectiontitle">sign in with <br>social media</p>
+        <p class="txt_loginsubtitle">You can also sign in withyour social media accounts</p>
+        <div class="btn_soicalmedia">
+          <a href="javascript:void(0);" class="sbtn btn_fb" id="r_socialFacebookBtn" ng-click="fbLogin()"><i class="gi i_fb"></i>Connect with Facebook</a>
+          <a href="javascript:void(0);" class="sbtn btn_google" id="r_i_gplus" ng-click="gpLogin()"><i class="gi i_google"></i>Connect with Google +</a>
+          <a href="javascript:void(0);" class="sbtn btn_twitter" id="r_socialTwitterBtn" ng-click="twLogin()"><i class="gi i_twitter"></i>Connect with Twitter</a>
+        </div>
+      </div>
+    </div>
+    <p class="text-align-center btn_loginregister">
+      <a href="javascript:void(0)" class="ubtn blackbtn" ng-click="userRegister()">register</a>
+    </p>

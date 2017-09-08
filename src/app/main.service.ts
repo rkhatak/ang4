@@ -15,7 +15,7 @@ export class MainService implements OnDestroy {
         this.onCartChange$Subscription = this.globals.onCartChange.subscribe(() => {
             this.cart = this.globals.cart;
             this.items = this.globals.items;
-        })
+        });
     }
     cart: any;
     items: any;
@@ -31,10 +31,24 @@ export class MainService implements OnDestroy {
     order_type: string = 'takeout';
     weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    pages = ['home', 'about', 'menu', 'gallery', 'contact', 'checkout'];
 
     private onCartChange$Subscription: Subscription;
 
+    chainRes(){
+        let path=location.pathname;
+        let rootArr=path.split('/');
+        let rootId=(typeof rootArr[1]!=='undefined')?rootArr[1]:'';
+        let rootPage=(typeof rootArr[2]!=='undefined')?rootArr[2]:'';
+        for(let i=0;i<=this.pages.length;i++){
+            if(rootId==this.pages[i]){
+               rootPage=this.pages[i]; 
+            }
+        }
+        return {'rootId':rootId,'rootPage':rootPage};
 
+    }
+    
     postToken(): Observable<any> {
         let self = this;
         let apiUrl = self.globals.apiBaseUrl + 'auth/token';
@@ -69,13 +83,19 @@ export class MainService implements OnDestroy {
         let themeUrl = 'assets/theme.require.json'
         let self = this;
         return self._http.get(themeUrl)
-            .map((response: Response) => <any>response.json())
-            .do(data => console.log(JSON.stringify(data)));
+            .map((response: Response) => <any>response.json());
+            //.do(data => console.log(JSON.stringify(data)));
     }
 
     getRestaurantDetails(resid) {
         let self = this;
         let apiUrl = self.getApiUrl('restaurant/details/' + resid);
+        return self._http.get(apiUrl)
+            .map((response: Response) => <any>response.json());
+    }
+    getUserDetails() {
+        let self = this;
+        let apiUrl = self.getApiUrl('user/details');
         return self._http.get(apiUrl)
             .map((response: Response) => <any>response.json());
     }
@@ -122,6 +142,7 @@ export class MainService implements OnDestroy {
         let self = this;
         return self._http.get(themeUrl)
             .map((response: Response) => <any>response.json());
+            //.do(data => console.log(JSON.stringify(data)));
     }
     getChainRestaurant(_theme) {
         let themeUrl = 'assets/data/' + _theme + '.restaurant.json'
@@ -554,6 +575,7 @@ export class MainService implements OnDestroy {
             this.globals.order_type = orderType;
             this.globals.date = date;
             this.globals.time = time;
+            
             this.globals.selectedDate = (date == '') ? timeslots[0].value : date;
             this.globals.selectedTime = time;
             this.globals.dates = timeslots;
@@ -590,7 +612,8 @@ export class MainService implements OnDestroy {
            this.date=date;
             this.getOperationsSlotsFun(date);
             this.cartCalution();
-            //this.globals.onCartItem();
+            //console.log(this.globals.date+'....'+this.globals.time);
+            //this.globals.onCart();
            
             // serverUtilityService.getTipOptions();
 
@@ -714,4 +737,5 @@ export class MainService implements OnDestroy {
             }
             // ga('send', 'event', 'Order Summary', "Order Takeout" , "Click_on_order_takeout_Button", 1, true);
         }
+        
 }

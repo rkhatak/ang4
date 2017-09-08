@@ -1,5 +1,5 @@
 <div class="a_modal hide">
-  <div class="a_modal-dialog" [ngSwitch]="dialogType">
+  <div class="a_modal-dialog {{dialogType}}" [ngSwitch]="dialogType">
     <a href="javascript:void(0)" class="i_close close" (click)="closeDialog()">+</a>
       <app-video-source *ngSwitchCase="'video'"></app-video-source>
       <app-activity-list *ngSwitchCase="'myActivity'"></app-activity-list>

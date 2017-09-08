@@ -162,72 +162,10 @@
                                         </div>
                                     </div>
                                     <div class="text-align-center _mt35">
-                                        <a href="javascript:void(0)" class="ubtn blackbtn" ng-click="checkOut(this);
-                                                    $event.preventDefault()">checkout</a> 
+                                        <a href="javascript:void(0)" class="ubtn blackbtn" (click)="checkOut($event)">checkout</a> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--<div *ngIf="checkoutDiv" class="checkoutDiv">
-                        <p class="msgreservation">Your  <span class="y-order-type"></span> order comes to <strong class="y-order-total"></strong> and brings you one step (and a short walk) closer to food nirvana. </p>
-                        <p class="txt_givecall">You can always give us a call at <a href="tel:{{formattedPhoneNo(currentRestaurant.phone_no)}}">{{formattedPhoneNo(currentRestaurant.phone_no)}}</a> to make any changes up to an hour before your {{cartOrderType}} time.</p>
-                        <div id="menu_checkout" class="menu_checkout clearfix">
-                            <div class="res_menu">
-                                <div class="text-align-center xs-hide _pb30">
-                                    <a href="javascript:void(0)" class="ubtn blackbtn y-backtomenu" ng-click="cartEditOrder()">Back to menu</a>
-                                </div>
-                                <div ng-if='checkoutDiv' class="checkoutsection">
-                                     <div ng-if="!checkoutPaymentSuccess" ng-include="getPartial('common', 'checkOutUser.html')"></div>
-                                     <div ng-if="checkoutPaymentSuccess" ng-include="getPartial('common', 'checkoutThankyou.html')"></div>
-                                </div>
-                            </div>
-                            <div class="box_ordersummary ordersummarystep2">
-                                <p class="txt_ordersummary">order summary</p>
-                                <p class="text-align-center t-edit_order_link"><a href="javascript:void(0)" class=" ubtn blackbtn" title="Edit Order" ng-click="cartEditOrder()">Edit Order</a></p>
-                                <p class="title_first _mt30">Order Type:</p>
-                                <p class="subtitle_first text-capitalize y-orderType"></p>
-                                <p class="title_first _mt30">Time of Order:</p>
-                                <p class="subtitle_first y-timeOfOrder"></p>
-                                <p class="title_first _mt30">Expected Time of <span class="y-orderType">{{order_type}}</span>:</p>
-                                <p class="subtitle_first y-expectedTime"></p>
-                                <p class="msgreservation y-dealtext hide"></p>
-                                <div class="box_orderitem _mt35">
-                                    <p class="title_bs_order">your order</p>
-                                    <div class="container">
-                                        <div *ngIf="cartItemDisplay" class="yourorder_box">
-                                                <div ngrepeat="cartitem in cartItems" ng-include="getPartial('common', 'orderItem.html')"></div>                                                
-                                            </div>
-                                        <div class="row txt_bs_item _mt35">
-                                            <div class="col-md-8 text-uppercase">Subtotal</div>
-                                            <div class="col-md-4 text-align-right">$<span class="order_subtotal">0.00</span></div>
-                                        </div>
-                                        <div class="row txt_bs_item t-deliverycharge">
-                                            <div class="col-md-8 text-uppercase">Delivery</div>
-                                            <div class="col-md-4 text-align-right">$<span class="deliverycharge_amount">0.00</span></div>
-                                        </div>
-                                        <div class="row txt_bs_item y-discount hide">
-                                            <div class="col-md-8 text-uppercase">Discount</div>
-                                            <div class="col-md-4 text-align-right">- $<span class="discount_amount">0.00</span></div>
-                                        </div>
-                                        <div class="row txt_bs_item">
-                                            <div class="col-md-8 text-uppercase">Tax</div>
-                                            <div class="col-md-4 text-align-right">$<span class="order_tax">0.00</span></div>
-                                        </div>
-                                        <div class="row txt_bs_item y-tip hide">
-                                            <div class="col-md-8 text-uppercase">Tip</div>
-                                            <div class="col-md-4 text-align-right default_tip"></div>
-                                        </div>                           
-                                        <div class="_mt35">
-                                            <p class="txt_bs_noorder txt_bs_item y-tip-desc hide">You may be asked to sign a receipt at the time of delivery. You do not need to re-enter the tip.</p>
-                                        </div>
-                                        <div class="row txt_bs_total totalCls">
-                                            <div class="col-md-8 text-uppercase">Total</div>
-                                            <div class="col-md-4 text-align-right">$<span class="order_total">0.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
                 </div>               

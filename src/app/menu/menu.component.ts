@@ -1,9 +1,12 @@
-import { Component, Input, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Inject,ViewChild} from '@angular/core';
 import { MainService } from '../main.service';
 import { Globals } from '../globals';
 import { Subscription } from 'rxjs/Subscription';
 import { DOCUMENT } from '@angular/platform-browser';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import {CartTimeComponent} from '../cart-time/cart-time.component';
+import { Router } from '@angular/router';
 import * as _ from 'underscore';
 declare var $: any;
 
@@ -15,7 +18,7 @@ declare var $: any;
 })
 export class MenuComponent implements OnInit, OnDestroy {
 
-  constructor(private mservice: MainService, public globals: Globals, @Inject(DOCUMENT) private document: any, public sanitizer: DomSanitizer) {
+  constructor(private router:Router,private mservice: MainService, public globals: Globals, @Inject(DOCUMENT) private document: any, public sanitizer: DomSanitizer,private pageScrollService: PageScrollService) {
    
        this.onCartItemChange$Subscription = this.globals.onCartItemChange.subscribe(
           () => {
@@ -43,6 +46,13 @@ export class MenuComponent implements OnInit, OnDestroy {
   setDeliveryAddress:any;
   globalObj:any;
   menuDeals:boolean=false;
+  flag:boolean=false;
+  deliveryIns:boolean=false;
+ takeoutIns:boolean=false;
+ public checkoutAddress:any;
+  public checkoutAddressData:any;
+  @ViewChild(CartTimeComponent) timeChild:CartTimeComponent;
+ 
 
   
   ngOnInit() {
@@ -191,6 +201,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     if (model.online_order_allowed == 0) {
         return false;
     }
+    
     this.addcart = true;
     let restId = this.globals.globalRestaurantId;
     let order_items = <any>[];
@@ -220,17 +231,17 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.cart.imagePath = this.imagePath;
     let eModelAddonsLen=model.addons.length;
     let eModelAddons=model.addons;
-    
     let AdPrice:any=0;
     if(eModelAddonsLen>0){
       for(let i=0;i<=eModelAddonsLen;i++){
         if(eModelAddons[i]){
-        AdPrice=eModelAddons[i]['optionPrice'];
+        AdPrice+=parseFloat(eModelAddons[i]['optionPrice']);
         }
       } 
     }
     this.cart.menuPrices = model.prices[0].value;
-    this.cart.sub_total = parseFloat(model.prices[0].value)+ parseFloat(AdPrice);
+    this.cart.sub_total = model.item_price ? model.item_price : model.prices[0].value;
+    this.cart.sub_total = parseFloat(this.cart.sub_total)+ parseFloat(AdPrice);
     this.addons(model.item_id, model.price_id, model.addons);
     this.globals.cart=this.cart;
     this.globals.onCart();
@@ -260,4 +271,50 @@ export class MenuComponent implements OnInit, OnDestroy {
     })
 
   }
+  cartLenthMinOrder:boolean=false;
+  checkOut(e) {
+    e.preventDefault();
+             let self=this; 
+             let restId = this.globals.globalRestaurantId;
+             let _currentRest = this.globals.currentRestaurantDetail;
+             if ((self.mservice.getStorage('order_type_' + restId) == 'delivery' && JSON.parse(self.mservice.getStorage('can_deliver_' + restId)) == false) || (self.mservice.getStorage('order_type_' + restId) === 'delivery' && self.mservice.getStorage('can_deliver_' + restId) === null)) {
+                self.mservice.setStorage("select_delivery_" + restId, 'delivery');
+                self.globals.dialogType = 'searchAddress';
+                self.searchAddress = (self.mservice.getStorage('address_value_' + restId) != null) ? self.mservice.getStorage('address_value_' + restId) : '';
+                self.globals.onDialogSet();
+            }else {
+                if (JSON.parse(self.mservice.getStorage('order_items_' + restId)).length == 0) {
+                    self.cartLenth=false;
+                    $(".t-no-order").css('border','solid 1px red');
+                    return false;
+                }
+                if (this.checkoutValidate() == false) {
+                    self.timeChild.toolTipOpen();
+                    return false;
+                }
+                if ((self.mservice.getStorage('order_type_' + restId) === 'delivery') && (parseFloat(self.mservice.getStorage('order_subtotal_' + restId)) < parseFloat(_currentRest.minimum_delivery))) {
+                    self.cartLenthMinOrder=true;
+                    $(".t-min-order").css('border','solid 1px red');
+                    return false;
+                }  
+               this.router.navigate(['/checkout']);
+            }
+            
+        }
+
+checkoutValidate() {
+            let self=this; 
+            let restId = this.globals.globalRestaurantId;
+            var flag=false;
+            if (self.mservice.getStorage('order_type_' + restId) == 'delivery' && (self.mservice.getStorage('delivery_order_date_' + restId) !== "" && self.mservice.getStorage('delivery_order_time_' + restId !== "") && self.mservice.getStorage('address_value_' + restId) !== "") && (self.mservice.getStorage('delivery_order_date_' + restId) !== null && self.mservice.getStorage('delivery_order_time_' + restId) !== null && self.mservice.getStorage('address_value_' + restId) !== null)) {
+                flag = true;
+                self.deliveryIns=true;
+            }
+            if (self.mservice.getStorage('order_type_' + restId) == 'takeout' && (self.mservice.getStorage('takeout_order_date_' + restId) !== "" && self.mservice.getStorage('takeout_order_time_' + restId) !== "") && (self.mservice.getStorage('takeout_order_date_' + restId) !== null && self.mservice.getStorage('takeout_order_time_' + restId) !== null)) {
+                flag = true;
+                self.takeoutIns=true;
+            }
+            return flag;
+        };
+
 }

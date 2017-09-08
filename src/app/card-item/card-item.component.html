@@ -2,7 +2,26 @@
       <div class="a_scroll_head">
                <p class="title_popupitem item_title">{{cart.item_name}}</p>
                <p class="txt_popupitemdes item_desc">{{cart.item_desc}}</p>
-               <p class="txt_popupitemprice item_price">${{cart.prices[0].value}}</p>
+               
+               <p *ngIf="cart.prices.length==1" class="txt_popupitemprice item_price">${{cart.prices[0].value}}</p>
+               
+               <div *ngIf="cart.prices.length > 1">
+               <div *ngIf="cart.price_id">
+                <select class="price-select y_price_select" [ngModel]="cart.price_id" (change)="changeItemPrice()">
+                   <option *ngFor="let priceSize of cart.prices" [selected]="cart.price_id==priceSize.id" [attr.priceAttr]="priceSize.id+'-'+priceSize.value+'-'+priceSize.desc" value="{{priceSize.id}}">${{priceSize.value+'('+priceSize.desc+')'}}</option>
+                </select>
+                <p class="_fs11">Multiple sizes available at different prices.</p>
+               </div>
+               <div *ngIf="!cart.price_id">
+                <select class="price-select y_price_select" (change)="changeItemPrice()">
+                   <option *ngFor="let priceSize of cart.prices" [attr.priceAttr]="priceSize.id+'-'+priceSize.value+'-'+priceSize.desc" value="{{priceSize.id}}">${{priceSize.value+'('+priceSize.desc+')'}}</option>
+                </select>
+                <p class="_fs11">Multiple sizes available at different prices.</p>
+               </div>
+               
+                
+                </div>
+
                </div>
                <div class="a_scroll a_area">  
                  <img *ngIf="cart.item_image_url!=''" src="{{cart.imagePath+cart.item_image_url}}" alt="{{cart.item_name}}" class="img-responsive">
@@ -22,6 +41,7 @@
                 <input type="hidden" id="item_id" value="{{cart.item_id}}">
                 <input type="hidden" id="price_id" value="{{cart.prices[0].id}}">
                 <input type="hidden" id="item_price" value="{{cart.prices[0].value}}">
+                <input type="hidden" id="price_desc" value="{{cart.prices[0].desc}}">
                 <input type="hidden" id="quantity" value="{{cart.quantity}}">
                 <input type="hidden" id="item_name" value="{{cart.item_name}}">
                 <input type="hidden" id="item_desc" value="{{cart.item_desc}}">

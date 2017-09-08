@@ -1,0 +1,4 @@
+.a_modal-dialog.video {
+    max-width: 100% !important;
+    overflow-y:hidden; 
+}
